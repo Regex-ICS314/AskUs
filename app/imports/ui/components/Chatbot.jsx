@@ -23,14 +23,39 @@ const ChatBox = (props) => {
       console.log('Error', error.message) :
       console.log(/* 'Success', `increased ${item.filename} freq by ${amount} (from ${item.freq} to ${freq})` */)));
   };
+  let mediaRecorder;
+  let audioChunks = [];
 
-  const handleSend = (e) => {
-    e.preventDefault();
+  const handleAudioStart = () => {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        mediaRecorder.ondataavailable = event => {
+          audioChunks.push(event.data);
+        };
+        mediaRecorder.start();
+      })
+      .catch(error => console.error('Error accessing microphone:', error));
+  };
+
+  const handleAudioStop = async () => new Promise((resolve, reject) => {
+    mediaRecorder.onstop = async () => {
+      const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+      resolve(audioBlob);
+    };
+    mediaRecorder.stop();
+  });
+  const handleSend = async (e, isAudio = false, audioBlob = null) => {
+    if (e) {
+      e.preventDefault();
+    }
     setLoading(true);
-    setChatHistory([...chatHistory, { sender: 'user', text: userInput }]);
 
     const userId = 'placeholderUserId'; // Placeholder, replace with actual userId if available
-    if (!userInput.trim()) {
+    let messageContent = isAudio ? audioBlob : userInput; // Use audioBlob for audio, userInput for text
+
+    if (!isAudio && !userInput.trim()) {
       // Handle the case when userInput is empty or just whitespace
       setLoading(false);
       console.error('User input is empty.');
@@ -40,12 +65,12 @@ const ChatBox = (props) => {
     // Record the start time just before making the Meteor call
     const timeStart = (new Date()).getTime();
 
-    // Meteor.call is executed immediately here without the setTimeout
-    Meteor.call('getChatbotResponse', userId, userInput, (error, result) => {
+    Meteor.call('getChatbotResponse', userId, userInput, messageContent, isAudio, (error, result) => {
       setLoading(false);
       if (!error) {
+        const messageText = isAudio ? 'Audio Message' : userInput; // Placeholder text for audio messages
         const newMessages = [
-          { sender: 'user', text: userInput },
+          { sender: 'user', text: messageText },
           { sender: 'bot', text: result.chatbotResponse },
         ];
 
@@ -72,14 +97,13 @@ const ChatBox = (props) => {
         const timeEnd = (new Date()).getTime();
         const responseTimeMs = timeEnd - timeStart;
         console.log(`Response took ${responseTimeMs}ms, or ${responseTimeMs / 1000} seconds. (User Input: "${userInput}")`);
-
       } else {
+        console.error(`Error: ${error.message}`);
         setChatHistory([...chatHistory, { sender: 'bot', text: 'Sorry, I encountered an error. Please try again later.' }]);
-        console.error(`Response failed. (User Input: "${userInput}")`);
       }
     });
   };
-  // Function to format chatbot's response
+    // Function to format chatbot's response
   const formatChatbotResponse = (text) => {
     const lines = text.split('\n');
     const linkRegex = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&;/~+#])?/;
@@ -164,6 +188,8 @@ const ChatBox = (props) => {
             setUserInput={setUserInput}
             handleSend={handleSend}
             loading={loading}
+            handleAudioStart={handleAudioStart}
+            handleAudioStop={handleAudioStop}
           />
         </Col>
       </Row>

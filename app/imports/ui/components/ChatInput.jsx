@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import { Mic } from 'react-bootstrap-icons';
+import { MicFill, MicMuteFill } from 'react-bootstrap-icons';
 
-const ChatInput = React.forwardRef((props, ref) => {
-  const { userInput, setUserInput, handleSend, loading } = props;
+const ChatInput = ({ userInput, setUserInput, handleSend, handleAudioStart, handleAudioStop, loading }) => {
+  const [isRecording, setIsRecording] = useState(false);
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      handleAudioStop().then(audioBlob => {
+        // Handle the audio blob here, e.g., by sending it to the server
+        handleSend(null, true, audioBlob); // Modified handleSend to accept audioBlob
+      });
+    } else {
+      handleAudioStart();
+    }
+    setIsRecording(!isRecording);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isRecording) {
+      handleSend(e, false);
+    }
+  };
 
   return (
-    <Form onSubmit={handleSend} ref={ref} className="mt-3">
+    <Form onSubmit={handleSubmit} className="mt-3">
       <div className="d-flex">
         <InputGroup className="siteSearch">
           <Form.Control
@@ -19,19 +38,22 @@ const ChatInput = React.forwardRef((props, ref) => {
             aria-label="User input"
             className="search-boarder"
           />
-          <Button type="submit" className="ms-2 search"><Mic /></Button>
         </InputGroup>
+        <Button onClick={toggleRecording}>
+          {isRecording ? <MicMuteFill /> : <MicFill />}
+        </Button>
         <Button type="submit" className="ms-2" style={{ backgroundColor: '#907139' }} disabled={loading}>Send</Button>
       </div>
     </Form>
   );
-});
+};
 
-// Define prop types
 ChatInput.propTypes = {
   userInput: PropTypes.string.isRequired,
   setUserInput: PropTypes.func.isRequired,
   handleSend: PropTypes.func.isRequired,
+  handleAudioStart: PropTypes.func.isRequired,
+  handleAudioStop: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

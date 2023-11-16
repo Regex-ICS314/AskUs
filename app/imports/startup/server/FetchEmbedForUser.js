@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import OpenAI from 'openai';
-import { check } from 'meteor/check';
+import OpenAI, { toFile } from 'openai';
+import { check, Match } from 'meteor/check';
 import { AskUs } from '../../api/askus/AskUs.js'; // Make sure to use the correct collection name
 
 // turn off console globally for eslint
@@ -214,6 +214,32 @@ function getAverageEmbedding(messages) {
   return sumEmbedding.map(value => value / embeddings.length);
 }
 
+async function transcribeAudio(audioBuffer) {
+  try {
+    const transcription = await openai.audio.transcriptions.create({
+      file: await toFile(audioBuffer, 'audio.mp3'),
+      model: 'whisper-1',
+    });
+    return transcription.text;
+  } catch (error) {
+    throw new Meteor.Error('transcription-error', `Error transcribing audio: ${error.message}`);
+  }
+}
+
+/**
+async function translateAudio(audioBuffer) {
+  try {
+    const translation = await openai.audio.translation.create({
+      file: await toFile(audioBuffer, 'audio.mp3'),
+      model: 'whisper-1',
+    });
+    return translation.text;
+  } catch (error) {
+    throw new Meteor.Error('translation-error', `Error translating audio: ${error.message}`);
+  }
+}
+ */
+
 /** Meteor method to get the chatbot's response for a given user message.
  * This method fetches the user's embedding, retrieves relevant context from the database,
  * prepares messages for the OpenAI chatbot, and fetches a completion response.
@@ -225,9 +251,23 @@ function getAverageEmbedding(messages) {
 const userSessions = {};
 
 Meteor.methods({
-  async getChatbotResponse(userId, userMessage) {
+  async getChatbotResponse(userId, userMessage, userInput, isAudio = false) {
     check(userId, String);
     check(userMessage, String);
+    check(userInput, Match.OneOf(String, Buffer));
+    check(isAudio, Boolean);
+
+    let inputText = userInput;
+    let userEmbedding;
+
+    if (isAudio) {
+      // Transcribe audio to text
+      inputText = await transcribeAudio(userInput);
+      userEmbedding = await getEmbeddingFromOpenAI(inputText);
+    } else {
+      // console.log('Fetched user embedding:', userEmbedding); // Log to confirm embedding is fetched
+      userEmbedding = await getEmbeddingFromOpenAI(userMessage);
+    }
 
     // Retrieve or initialize the user's session
     const userSession = userSessions[userId] || {
@@ -238,8 +278,6 @@ Meteor.methods({
     console.log('Current Session State after retrieval for user', userId, ':', userSession);
 
     // Fetch and store the embedding for the user's message
-    const userEmbedding = await getEmbeddingFromOpenAI(userMessage);
-    // console.log('Fetched user embedding:', userEmbedding); // Log to confirm embedding is fetched
     userSession.messages.push({ role: 'user', content: userMessage, embedding: userEmbedding });
     console.log('Session State after adding user message for user', userId, ':', userSession);
     // Ensure the session does not exceed the maximum length
