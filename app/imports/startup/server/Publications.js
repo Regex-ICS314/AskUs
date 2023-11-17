@@ -2,11 +2,17 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { check } from 'meteor/check';
 import { AskUs } from '../../api/askus/AskUs';
+<<<<<<< Updated upstream
 import { Visits } from '../../api/visit/Visits';
+=======
+import { Messages } from '../../api/message/Messages';
+import { Sessions } from '../../api/session/Sessions';
+import { Times } from '../../api/time/Times';
+>>>>>>> Stashed changes
 
 // Publishes page visit collection.
-Meteor.publish(Visits.userPublicationName, function () {
-  return Visits.collection.find();
+Meteor.publish(Times.userPublicationName, function () {
+  return Times.collection.find();
 });
 
 // Publishes the top 8 most frequently visited sites.
