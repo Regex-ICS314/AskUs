@@ -2,10 +2,18 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { check } from 'meteor/check';
 import { AskUs } from '../../api/askus/AskUs';
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+import { Messages } from '../../api/message/Messages';
+import { Sessions } from '../../api/session/Sessions';
+>>>>>>> main
 import { Visits } from '../../api/visit/Visits';
+=======
 import { Messages } from '../../api/message/Messages';
 import { Sessions } from '../../api/session/Sessions';
 import { Times } from '../../api/time/Times';
+>>>>>>> Stashed changes
 
 // Publishes page visit collection.
 Meteor.publish(Times.userPublicationName, function () {

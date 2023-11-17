@@ -5,7 +5,6 @@ import { Button, Col, Container, Image, Nav, Navbar, Row, NavDropdown, InputGrou
 import { BoxArrowRight, Facebook, Instagram, List, PersonFill, PersonPlusFill, Search, Twitter, Youtube } from 'react-bootstrap-icons';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-
 // import EmbeddedButton from './EmbeddedButton'; // TODO: Remove this line when you remove the EmbeddedButton component.
 
 const NavBar = () => {
@@ -133,7 +132,14 @@ const NavBar = () => {
                   <NavDropdown.Item id="landing" as={NavLink} to="/" key="landing">Home</NavDropdown.Item>
                   <NavDropdown.Item id="infosec" as={NavLink} to="/infosec" key="infosec">Infosec</NavDropdown.Item>
                   <NavDropdown.Item id="chatbot-nav" as={NavLink} to="/chatbot" key="chatbot">Chatbot</NavDropdown.Item>
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
                   <NavDropdown.Item id="user-panel" as={NavLink} to="user" key="/user">User Panel</NavDropdown.Item>
+>>>>>>> Stashed changes
+=======
+                  <NavDropdown.Item id="user-panel" as={NavLink} to="user" key="user">User Panel</NavDropdown.Item>
+>>>>>>> main
                   {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                     <NavDropdown.Item id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</NavDropdown.Item>
                   ) : ''}
