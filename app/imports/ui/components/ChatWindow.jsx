@@ -5,11 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Button, InputGroup } from 'react-bootstrap';
 import { ArrowClockwise } from 'react-bootstrap-icons';
+import ReactStars from 'react-rating-stars-component';
 import ChatLoading from './ChatLoading';
 import { Messages } from '../../api/message/Messages';
 import LoadingSpinner from './LoadingSpinner';
-import ReactStars from "react-rating-stars-component";
-import { render } from "react-dom";
 
 const transition = {
   type: 'spring',
