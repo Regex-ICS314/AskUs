@@ -111,33 +111,13 @@ const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler-bottom">MENU<List className="pb-1" /></Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav variant="underline" className="justify-content-start bottom-nav ms-2">
-                <Nav.Link href="https://www.hawaii.edu/its/help-desk/index.html">HELP DESK</Nav.Link>
-                <Nav.Link href="https://www.hawaii.edu/its/services/">ITS Services</Nav.Link>
-                <Nav.Link href="https://www.hawaii.edu/infosec/">INFORMATION SECURITY</Nav.Link>
-                <Nav.Link href="https://www.hawaii.edu/its/alerts/">ALERTS</Nav.Link>
-                <NavDropdown alignright="true" title="ABOUT" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/">About</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/about-cio/index.html">
-                    VP for Information Technology and Chief Information Officer
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/academic-development-and-technology-adt/index.html">Academic Development and Technology (ADT)</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/academic-technologies/index.html">Academic Technologies</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/csoc/index.html">Client Service and Operations Center (CSOC)</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/cyberinfrastructure/index.html">Cyberinfrastructure</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/enterprise-systems/index.html">Enterprise Systems</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/information-security/index.html">Information Security</NavDropdown.Item>
-                  <NavDropdown.Item href="https://www.hawaii.edu/its/about/information-security/index.html">Technology Infrastructure</NavDropdown.Item>
-                </NavDropdown>
-                <NavDropdown title="ASK US">
-                  <NavDropdown.Item id="landing" as={NavLink} to="/" key="landing">Home</NavDropdown.Item>
-                  <NavDropdown.Item id="infosec" as={NavLink} to="/infosec" key="infosec">Infosec</NavDropdown.Item>
-                  <NavDropdown.Item id="chatbot-nav" as={NavLink} to="/chatbot" key="chatbot">Chatbot</NavDropdown.Item>
-                  <NavDropdown.Item id="user-panel" as={NavLink} to="user" key="user">User Panel</NavDropdown.Item>
-                  {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                    <NavDropdown.Item id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</NavDropdown.Item>
-                  ) : ''}
-                </NavDropdown>
-                <Nav.Link href="https://www.hawaii.edu/its/contact/">CONTACT ITS</Nav.Link>
+                <Nav.Link id="landing" as={NavLink} to="/" key="landing">Home</Nav.Link>
+                <Nav.Link id="infosec" as={NavLink} to="/infosec" key="infosec">Infosec</Nav.Link>
+                <Nav.Link id="chatbot-nav" as={NavLink} to="/chatbot" key="chatbot">Chatbot</Nav.Link>
+                <Nav.Link id="user-panel" as={NavLink} to="user" key="user">User Panel</Nav.Link>
+                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                  <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
+                ) : ''}
               </Nav>
             </Navbar.Collapse>
           </Container>
