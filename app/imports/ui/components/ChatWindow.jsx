@@ -3,9 +3,13 @@ import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Button, InputGroup } from 'react-bootstrap';
+import { ArrowClockwise } from 'react-bootstrap-icons';
 import ChatLoading from './ChatLoading';
 import { Messages } from '../../api/message/Messages';
 import LoadingSpinner from './LoadingSpinner';
+import ReactStars from "react-rating-stars-component";
+import { render } from "react-dom";
 
 const transition = {
   type: 'spring',
@@ -24,6 +28,10 @@ const variants = {
     y: 0,
     transition,
   },
+};
+
+const ratingChanged = (newRating) => {
+  console.log(newRating);
 };
 
 const ChatWindow = React.forwardRef((props, ref) => {
@@ -67,6 +75,17 @@ const ChatWindow = React.forwardRef((props, ref) => {
                 variants={variants}
               >
                 {message.sender === 'bot' ? formatChatbotResponse(message.message) : message.message}
+                {message.sender === 'bot' ? (
+                  <InputGroup>
+                    <ReactStars
+                      count={5}
+                      onChange={ratingChanged}
+                      size={24}
+                      activeColor="#ffffff"
+                    />
+                    <Button className="ms-auto refresh"><ArrowClockwise /></Button>
+                  </InputGroup>
+                ) : ''}
               </motion.div>
             </div>
           </React.Fragment>

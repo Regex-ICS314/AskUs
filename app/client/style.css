@@ -71,6 +71,7 @@ body .navbar {
   --bs-btn-hover-color: trasparent !important;
   --bs-btn-hover-bg: trasparent !important;
   --bs-btn-hover-border-color: trasparent !important;
+  --bs-btn-active-bg: trasparent !important;
 
 }
 .search-boarder {
@@ -169,4 +170,17 @@ footer {
   border-right: var(--t) solid #0000;
   margin-left: var(--t);
   place-self: end;
+}
+
+/* chatbot refresh button */
+.refresh {
+  color: white !important; /* Change the color */
+  --bs-btn-color: white !important;
+  --bs-btn-bg: trasparent !important;
+  --bs-btn-border-color: trasparent !important;
+  --bs-btn-hover-color: trasparent !important;
+  --bs-btn-hover-bg: trasparent !important;
+  --bs-btn-hover-border-color: trasparent !important;
+  --bs-btn-active-bg: trasparent !important;
+
 }
