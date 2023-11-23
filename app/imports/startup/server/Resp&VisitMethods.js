@@ -7,7 +7,7 @@ import { Visits } from '../../api/visit/Visits';
 /* eslint-disable no-console */
 
 Meteor.methods({
-  AvgRespTime() {
+  getAvgRespTime() {
     if (Roles.userIsInRole(this.userId, 'admin')) {
       let total = 0;
       RespTimes.collection.find().forEach(item => {
