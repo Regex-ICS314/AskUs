@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Container, Table, Col } from 'react-bootstrap';
-import PaginationTableItem from './PaginationTableItem';
+import AdminPaginationTableItem from './AdminPaginationTableItem';
 // eslint-disable-next-line no-unused-vars
 import LoadingSpinner from './LoadingSpinner';
 import { AskUs } from '../../api/askus/AskUs';
 
 // eslint-disable-next-line react/prop-types
-const PaginationTable = ({ itemsPerPage }) => {
+const AdminPaginationTable = ({ itemsPerPage }) => {
   const [totalCount, setTotalCount] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [pageCount, setPageCount] = useState(0);
@@ -60,7 +60,7 @@ const PaginationTable = ({ itemsPerPage }) => {
             </tr>
           </thead>
           <tbody>
-            {pages.map((page) => <PaginationTableItem key={page._id} page={page} />)}
+            {pages.map((page) => <AdminPaginationTableItem key={page._id} page={page} />)}
           </tbody>
         </Table>
         {totalCount > 0 ? (
@@ -91,4 +91,4 @@ const PaginationTable = ({ itemsPerPage }) => {
   );
 };
 
-export default PaginationTable;
+export default AdminPaginationTable;

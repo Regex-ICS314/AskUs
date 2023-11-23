@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
 /** Displays average response time */
-const AvgResponseAdmin = () => {
+const AdminAvgResp = () => {
   const [respTime, setRespTime] = useState(0);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const AvgResponseAdmin = () => {
   );
 };
 
-export default AvgResponseAdmin;
+export default AdminAvgResp;

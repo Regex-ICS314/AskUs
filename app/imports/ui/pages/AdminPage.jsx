@@ -5,12 +5,12 @@ import BarChartComponent from '../components/AdminBarChart';
 import StatusSquare from '../components/StatusSquare';
 import EmbeddedButton from '../components/EmbeddedButton';
 import UpdateDatabaseButton from '../components/AskUsCollectionUpdateButton';
-import PaginationTable from '../components/PaginationTable';
-import AvgResponseAdmin from '../components/AvgResponseAdmin';
+import AdminPaginationTable from '../components/AdminPaginationTable';
+import AdminAvgResp from '../components/AdminAvgResp';
 // eslint-disable-next-line no-unused-vars
-import DragNDrop from '../components/DragNDrop';
+import AdminDragNDrop from '../components/AdminDragNDrop';
 
-/* Renders a table containing all of the Stuff documents. Use <PaginationTableItem> to render each row. */
+/* Renders a table containing all of the Stuff documents. Use <AdminPaginationTableItem> to render each row. */
 const AdminPage = () => {
   const [complete, setComplete] = useState(false);
   const [complete2, setComplete2] = useState(false);
@@ -54,7 +54,7 @@ const AdminPage = () => {
 
       <Row>
         <Col lg={6}>
-          <PaginationTable itemsPerPage={10} />
+          <AdminPaginationTable itemsPerPage={10} />
         </Col>
 
         <Col className="justify-content-md-center text-center" lg={6}>
@@ -90,13 +90,13 @@ const AdminPage = () => {
               </Card>
             </Col>
             <Col>
-              <AvgResponseAdmin />
+              <AdminAvgResp />
             </Col>
 
           </Row>
 
           <Row>
-            <DragNDrop />
+            <AdminDragNDrop />
           </Row>
         </Col>
       </Row>

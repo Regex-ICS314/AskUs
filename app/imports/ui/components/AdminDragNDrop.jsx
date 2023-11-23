@@ -32,7 +32,7 @@ const rejectStyle = {
 };
 
 // This component renders a drag and drop zone for the admin page (DOES NOT CURRENTLY UPLOAD ANYTHING)
-const DragNDrop = () => {
+const AdminDragNDrop = () => {
   const {
     getRootProps,
     getInputProps,
@@ -64,4 +64,4 @@ const DragNDrop = () => {
   );
 };
 
-export default DragNDrop;
+export default AdminDragNDrop;

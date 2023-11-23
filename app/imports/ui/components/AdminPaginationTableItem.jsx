@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /** Renders a single row in the FAQStats (Admin) table. See pages/AdminPage.jsx. */
-const PaginationTableItem = ({ page }) => {
+const AdminPaginationTableItem = ({ page }) => {
   if (page) {
     return (
       <tr>
@@ -24,7 +24,7 @@ const PaginationTableItem = ({ page }) => {
 };
 
 // Require a document to be passed to this component.
-PaginationTableItem.propTypes = {
+AdminPaginationTableItem.propTypes = {
   page: PropTypes.shape({
     filename: PropTypes.string,
     question: PropTypes.string,
@@ -33,4 +33,4 @@ PaginationTableItem.propTypes = {
   }).isRequired,
 };
 
-export default PaginationTableItem;
+export default AdminPaginationTableItem;
