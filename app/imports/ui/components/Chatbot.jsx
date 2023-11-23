@@ -33,7 +33,7 @@ const ChatBox = (props) => {
 
   // Function to add data to the RespTimes collection.
   const addDataToRespTimes = (data) => {
-    // console.log(`Adding time: ${data.start} to ${data.end}, approx. ${data.responseTimeMs}ms`);
+    // console.log(`Adding time: ${data.start} to ${data.end}, approx. ${data.responseTimeMs}ms. (User Input: "${data.input}")`);
     RespTimes.collection.insert(data);
   };
 
@@ -104,6 +104,7 @@ const ChatBox = (props) => {
         const responseTimeMs = timeEnd - timeStart;
         // console.log(`Response took ${responseTimeMs}ms, or ${responseTimeMs / 1000} seconds. (User Input: "${userInput}")`);
         addDataToRespTimes({
+          input: userInput,
           start: timeStart,
           end: timeEnd,
           responseTimeMs: responseTimeMs,
