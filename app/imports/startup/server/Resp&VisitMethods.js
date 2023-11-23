@@ -7,6 +7,7 @@ import { Visits } from '../../api/visit/Visits';
 /* eslint-disable no-console */
 
 Meteor.methods({
+  // Gets the average amount of time it takes for chatbot to respond using RespTimes collection.
   getAvgRespTime() {
     if (Roles.userIsInRole(this.userId, 'admin')) {
       let total = 0;

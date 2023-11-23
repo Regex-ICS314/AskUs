@@ -22,7 +22,7 @@ class VisitCollection {
 }
 
 /**
- * The singleton instance of the AskUsCollection.
+ * The singleton instance of the VisitCollection.
  * @type {VisitCollection}
  */
 export const Visits = new VisitCollection();
