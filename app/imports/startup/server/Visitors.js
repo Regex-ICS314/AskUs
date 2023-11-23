@@ -16,9 +16,13 @@ const addDataToVisits = (data) => {
 Meteor.startup(() => {
   if (Visits.collection.find().count() === 0) {
     console.log('No data found in Visits collection. Initializing with default data.');
+    const d = new Date();
     addDataToVisits({
-      pageUrl: 'chatbot',
-      pageName: 'Chatbot',
+      page: 'chatbot',
+      date: d,
+      year: d.getFullYear(),
+      month: d.getMonth(),
+      day: d.getDay(),
       visitCount: 0,
     });
   }

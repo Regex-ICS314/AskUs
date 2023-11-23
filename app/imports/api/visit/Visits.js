@@ -9,8 +9,11 @@ class VisitCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      pageUrl: String,
-      pageName: String,
+      page: String,
+      date: Date,
+      year: Number,
+      month: Number,
+      day: Number,
       visitCount: Number,
     });
     // Attach the schema to the collection.
