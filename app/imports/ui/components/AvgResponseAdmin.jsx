@@ -16,6 +16,9 @@ const AvgResponseAdmin = () => {
         setRespTime(adjusted);
       }
     });
+    if (!(respTime > 0)) {
+      setRespTime(0);
+    }
   });
 
   return (

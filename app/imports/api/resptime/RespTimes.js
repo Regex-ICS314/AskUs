@@ -9,6 +9,7 @@ class TimeCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
+      input: String,
       start: Number,
       end: Number,
       responseTimeMs: Number,

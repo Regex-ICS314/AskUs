@@ -9,8 +9,10 @@ class VisitCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      pageUrl: String,
-      pageName: String,
+      page: String,
+      date: Date,
+      year: Number,
+      day: Number,
       visitCount: Number,
     });
     // Attach the schema to the collection.
@@ -22,7 +24,7 @@ class VisitCollection {
 }
 
 /**
- * The singleton instance of the AskUsCollection.
+ * The singleton instance of the VisitCollection.
  * @type {VisitCollection}
  */
 export const Visits = new VisitCollection();

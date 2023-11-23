@@ -22,11 +22,11 @@ const AdminPage = () => {
   useEffect(() => {
     Meteor.call('embedExist', (error, result) => {
       if (error) {
-        console.error('Error getting embed status:', error);
+        console.log('Error getting embed status:', error);
       } else {
         // console.log('Status:', result);
+        setComplete(result);
       }
-      setComplete(result);
     });
   });
 
@@ -34,11 +34,11 @@ const AdminPage = () => {
   useEffect(() => {
     Meteor.call('otherDbExist', (error, result) => {
       if (error) {
-        console.error('Error getting FERPA status:', error);
+        // console.log('FERPA not found.');
       } else {
         // console.log('Status:', result);
+        setComplete2(result);
       }
-      setComplete2(result);
     });
   });
 
@@ -95,10 +95,9 @@ const AdminPage = () => {
 
           </Row>
 
-          { /* Commented unused component for HACC
           <Row>
             <DragNDrop />
-          </Row> */ }
+          </Row>
         </Col>
       </Row>
 
