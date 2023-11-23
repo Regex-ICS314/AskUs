@@ -183,6 +183,18 @@ const ChatBox = (props) => {
     }
   }, [messages]);
 
+  // Increases page visits (loads) by one
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
+    Meteor.call('increaseVisitCount', (error, result) => {
+      if (error) {
+        console.error('Error increasing visit count:', error);
+      } else {
+        // console.log('Success:', result);
+      }
+    });
+  }, []);
+
   // Autosubmits the form if starting input is not empty (ie redirected from landing)
   const form = useRef();
   useEffect(() => {

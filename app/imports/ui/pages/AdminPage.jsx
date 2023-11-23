@@ -95,10 +95,9 @@ const AdminPage = () => {
 
           </Row>
 
-          { /* Commented unused component for HACC
           <Row>
             <DragNDrop />
-          </Row> */ }
+          </Row>
         </Col>
       </Row>
 

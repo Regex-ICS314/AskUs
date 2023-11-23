@@ -20,4 +20,8 @@ Meteor.methods({
     }
     return ('');
   },
+
+  increaseVisitCount() {
+    return ('');
+  },
 });
