@@ -3,7 +3,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { RespTimes } from '../../api/resptime/RespTimes';
 // eslint-disable-next-line no-unused-vars
 import { Visits } from '../../api/visit/Visits';
-import { AskUs } from '../../api/askus/AskUs';
 
 /* eslint-disable no-console */
 
@@ -25,7 +24,7 @@ Meteor.methods({
       total /= denom;
       return total;
     }
-    return ('');
+    return (0);
   },
 
   increaseVisitCount() {
