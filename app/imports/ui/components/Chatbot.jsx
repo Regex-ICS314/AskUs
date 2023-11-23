@@ -190,7 +190,7 @@ const ChatBox = (props) => {
       if (error) {
         console.error('Error increasing visit count:', error);
       } else {
-        // console.log('Success:', result);
+        console.log(result);
       }
     });
   }, []);
