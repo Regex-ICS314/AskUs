@@ -1,4 +1,7 @@
 import { Meteor } from 'meteor/meteor';
+// Next line creates the collection, even though it does not add anything here.
+// eslint-disable-next-line no-unused-vars
+import { RespTimes } from '../../api/resptime/RespTimes';
 import { Visits } from '../../api/visit/Visits';
 
 /* eslint-disable no-console */
