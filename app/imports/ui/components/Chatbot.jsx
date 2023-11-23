@@ -11,6 +11,7 @@ import { Messages } from '../../api/message/Messages';
 import SimilarArticles from './SimilarArticles';
 import { Sessions } from '../../api/session/Sessions';
 import { RespTimes } from '../../api/resptime/RespTimes';
+// eslint-disable-next-line no-unused-vars
 import { Visits } from '../../api/visit/Visits';
 
 const ChatBox = (props) => {
