@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Meteor } from 'meteor/meteor';
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -107,7 +108,7 @@ const ChatBox = (props) => {
   const formatChatbotResponse = (text) => {
     const lines = text.split('\n');
     // Regex to match Markdown links
-    const markdownLinkRegex = /\[([^\]]+)\]\((http[s]?:\/\/[^\s)]+)\)/g;
+    const markdownLinkRegex = /\[([^\]]+)]\((http[s]?:\/\/[^\s)]+)\)/g;
 
     const formattedLines = lines.map((line, index) => {
       // Replace Markdown links with HTML anchor tags
@@ -118,6 +119,7 @@ const ChatBox = (props) => {
 
     return <div>{formattedLines}</div>;
   };
+
   // Helper function that provides message sender above messages that aren't chatbot links.
   const chatSender = (message) => {
     if (message.sender === 'user') {
