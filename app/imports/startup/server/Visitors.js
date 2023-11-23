@@ -16,13 +16,15 @@ const addDataToVisits = (data) => {
 Meteor.startup(() => {
   if (Visits.collection.find().count() === 0) {
     console.log('No data found in Visits collection. Initializing with default data.');
-    const d = new Date();
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    // day is out of 365.
+    const day = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
     addDataToVisits({
       page: 'chatbot',
-      date: d,
-      year: d.getFullYear(),
-      month: d.getMonth(),
-      day: d.getDay(),
+      date: currentDate,
+      year: currentDate.getFullYear(),
+      day: day,
       visitCount: 0,
     });
   }

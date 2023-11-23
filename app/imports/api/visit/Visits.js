@@ -12,7 +12,6 @@ class VisitCollection {
       page: String,
       date: Date,
       year: Number,
-      month: Number,
       day: Number,
       visitCount: Number,
     });

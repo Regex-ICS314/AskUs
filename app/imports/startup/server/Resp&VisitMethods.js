@@ -29,10 +29,12 @@ Meteor.methods({
 
   increaseVisitCount() {
     const current = new Date();
+    const startDate = new Date(current.getFullYear(), 0, 1);
+    // day is out of 365.
+    const day = Math.floor((current - startDate) / (24 * 60 * 60 * 1000));
     if (Visits.collection.find(
       { year: current.getFullYear(),
-        month: current.getMonth(),
-        day: current.getDay(),
+        day: day,
       },
     ).count() === 0) {
       console.log('Current date not found in Visits collection. Initializing with default data.');
@@ -40,12 +42,16 @@ Meteor.methods({
         page: 'chatbot',
         date: current,
         year: current.getFullYear(),
-        month: current.getMonth(),
-        day: current.getDay(),
-        visitCount: 0,
+        day: day,
+        visitCount: 1,
       });
       return ('Created new date entry.');
     }
+    const id = Visits.collection.find({ year: current.getFullYear(), day: day }).fetch()[0]._id;
+    const visits = Visits.collection.find({ year: current.getFullYear(), day: day }).fetch()[0].visitCount;
+    Visits.collection.update(id, { $set: { visitCount: visits + 1 } }, (error) => (error ?
+      console.log('Error', error.message, 'error') :
+      console.log(/* `Increasing ${id} visits to ${visits + 1}.` */)));
     return ('Incremented date successfully.');
   },
 });
