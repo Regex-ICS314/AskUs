@@ -10,6 +10,9 @@ import ChatInput from './ChatInput';
 import { Messages } from '../../api/message/Messages';
 import SimilarArticles from './SimilarArticles';
 import { Sessions } from '../../api/session/Sessions';
+import { RespTimes } from '../../api/resptime/RespTimes';
+// eslint-disable-next-line no-unused-vars
+import { Visits } from '../../api/visit/Visits';
 
 const ChatBox = (props) => {
   const { input } = props;
@@ -26,6 +29,12 @@ const ChatBox = (props) => {
     AskUs.collection.update(_id, { $set: { freq } }, (error) => (error ?
       console.log('Error', error.message) :
       console.log(/* 'Success', `increased ${item.filename} freq by ${amount} (from ${item.freq} to ${freq})` */)));
+  };
+
+  // Function to add data to the RespTimes collection.
+  const addDataToRespTimes = (data) => {
+    // console.log(`Adding time: ${data.start} to ${data.end}, approx. ${data.responseTimeMs}ms`);
+    RespTimes.collection.insert(data);
   };
 
   const handleLanguageSelect = (e) => {
@@ -93,7 +102,12 @@ const ChatBox = (props) => {
         // Log the response time
         const timeEnd = (new Date()).getTime();
         const responseTimeMs = timeEnd - timeStart;
-        console.log(`Response took ${responseTimeMs}ms, or ${responseTimeMs / 1000} seconds. (User Input: "${userInput}")`);
+        // console.log(`Response took ${responseTimeMs}ms, or ${responseTimeMs / 1000} seconds. (User Input: "${userInput}")`);
+        addDataToRespTimes({
+          start: timeStart,
+          end: timeEnd,
+          responseTimeMs: responseTimeMs,
+        });
 
       } else {
         Messages.collection.insert(
