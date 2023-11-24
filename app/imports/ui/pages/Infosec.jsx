@@ -4,7 +4,7 @@ import { BuildingFillGear, CardChecklist, MortarboardFill, Newspaper, PersonBadg
 
 /* A simple component to render the landing page. */
 const Infosec = () => (
-  <Container>
+  <Container id="infosec-page">
     <Row>
       <Col className="col-9">
         <Stack gap={4}>

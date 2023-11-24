@@ -40,7 +40,7 @@ const UserPage = () => {
   }, []);
 
   return (
-    <Container>
+    <Container id="user-page">
       <h1> History </h1>
       <Col lg={6}>
         {ready ? (

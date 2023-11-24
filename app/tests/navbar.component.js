@@ -17,7 +17,7 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.click('#login-dropdown');
+    await testController.click('#basic-nav-dropdown');
     await testController.click('#login-dropdown-sign-in');
   }
 
@@ -52,6 +52,43 @@ class NavBar {
     await testController.click('#login-dropdown');
     await testController.click('#login-dropdown-sign-up');
   }
+
+  /** Navigate to the Admin page. */
+  async gotoAdminPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#list-stuff-admin-nav');
+  }
+
+  /** Navigate to the User page. */
+  async gotoUserPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#user-panel'); // Replace with the actual selector for the User page link
+  }
+
+  /** Navigate to the InfoSec page. */
+  async gotoInfoSecPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#infosec'); // Replace with the actual selector for the InfoSec page link
+  }
+
+  /** Navigate to the Chatbot page. */
+  async gotoChatbotPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#chatbot-nav'); // Replace with the actual selector for the Chatbot page link
+  }
+
 }
 
 export const navBar = new NavBar();

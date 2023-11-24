@@ -43,7 +43,7 @@ const AdminPage = () => {
   });
 
   return (
-    <Container>
+    <Container id="admin-page">
       <Container>
         <p><a href="https://askuh.info">Home</a> &gt; Admin</p>
       </Container>
@@ -54,7 +54,7 @@ const AdminPage = () => {
 
       <Row>
         <Col lg={6}>
-          <AdminPaginationTable itemsPerPage={10} />
+          <AdminPaginationTable id="admin-pagination-table" itemsPerPage={10} />
         </Col>
 
         <Col className="justify-content-md-center text-center" lg={6}>
@@ -72,10 +72,10 @@ const AdminPage = () => {
                 </Card.Header>
                 <Row className="text-center g-0 my-1">
                   <Col>
-                    <EmbeddedButton />
+                    <EmbeddedButton id="embedded-button" />
                   </Col>
                   <Col lg={2}>
-                    <StatusSquare complete={complete} size={1} />
+                    <StatusSquare id="status-square-1" complete={complete} size={1} />
                   </Col>
                 </Row>
 
