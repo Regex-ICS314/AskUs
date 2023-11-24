@@ -4,6 +4,7 @@ import { getEmbeddingFromOpenAI, createOpenAICompletion } from './services/OpenA
 import { getRelevantContextFromDB } from './services/ArticleService';
 import { getAverageEmbedding, computeCosineSimilarity } from './utils/MathUtils';
 import { MAX_SESSION } from './utils/Constants';
+import { getSession, updateSession } from './services/SessionManager';
 
 // turn off console globally for eslint
 /* eslint-disable no-console */
@@ -37,7 +38,6 @@ function chooseModelForTokenCount(tokenCount) {
  *
  */
 // Define a global or persistent object to store session data
-const userSessions = {};
 
 Meteor.methods({
   async getChatbotResponse(userId, userMessage, userLanguage) {
@@ -46,11 +46,8 @@ Meteor.methods({
     check(userLanguage, String);
 
     // Retrieve or initialize the user's session
-    const userSession = userSessions[userId] || {
-      messages: [],
-      currentTopicEmbedding: null, // Embedding representing the current topic
-      currentArticles: null, // Field to store the current articles
-    };
+    const userSession = getSession(userId);
+
     console.log('Current Session State after retrieval for user', userId, ':', userSession);
 
     // Fetch and store the embedding for the user's message
@@ -138,9 +135,14 @@ Meteor.methods({
       similarArticles = userSession.currentArticles;
     }
 
+    // Update the session in the database
     userSession.messages.push({ role: 'assistant', content: chatbotResponse });
-    console.log('Session State after adding assistant response for user', userId, ':', userSession);
-    userSessions[userId] = userSession; // Update the session
+    updateSession(userId, {
+      messages: userSession.messages,
+      currentTopicEmbedding: userSession.currentTopicEmbedding,
+      currentArticles: userSession.currentArticles,
+    });
+
     console.log('Final Session State before response for user', userId, ':', userSession);
 
     return {
