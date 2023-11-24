@@ -1,4 +1,4 @@
-![ci-badge](https://github.com/Regex-ICS314/AskUs/workflows/ci-meteor-application-template-react/badge.svg)
+[![ci-Ask-Us](https://github.com/Regex-ICS314/AskUs/actions/workflows/ci.yml/badge.svg)](https://github.com/Regex-ICS314/AskUs/actions/workflows/ci.yml)
 
 This website is currently deployed at: [https://askuh.info/](https://askuh.info/), with our pages under the Ask Us dropdown specifically (landing, chatbot, admin).
 
