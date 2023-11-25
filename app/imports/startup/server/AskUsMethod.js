@@ -1,11 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import OpenAIApi from 'openai';
 import crypto from 'crypto';
 import { Roles } from 'meteor/alanning:roles';
 import { AskUs } from '../../api/askus/AskUs.js';
-
-const openai = new OpenAIApi(process.env.OPENAI_API_KEY);
-const MAX_TOKENS = 7500; // Max tokens allowed by the model: 8192
+import openai from '/utils/OpenAiClient';
+import { MAX_TOKENS } from './utils/Constants';
 
 /* eslint-disable no-console */
 
