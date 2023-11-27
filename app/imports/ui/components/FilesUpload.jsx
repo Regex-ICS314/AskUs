@@ -5,7 +5,6 @@ class FileUploadComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uploading: [],
       progress: 0,
       inProgress: false,
       uploadedFiles: [],
@@ -23,7 +22,6 @@ class FileUploadComponent extends Component {
       }, false);
 
       this.setState({
-        uploading: uploadInstance, // track uploading progress
         inProgress: true,
       });
 
@@ -42,9 +40,17 @@ class FileUploadComponent extends Component {
         }
       });
 
-      uploadInstance.on('progress', (progress, fileObj) => {
-        console.log(`Upload Percentage: ${progress}`);
-        this.setState({ progress });
+      uploadInstance.on('end', (error) => {
+        if (error) {
+          console.error('Error during upload:', error);
+          this.setState({ inProgress: false });
+        } else {
+          console.log('File Uploaded');
+          this.setState(prevState => ({
+            uploadedFiles: [...prevState.uploadedFiles],
+            inProgress: false,
+          }));
+        }
       });
 
       uploadInstance.start(); // Start the upload
@@ -52,29 +58,32 @@ class FileUploadComponent extends Component {
   }
 
   renderUploadedFiles() {
-    return this.state.uploadedFiles.map(file => (
+    const { uploadedFiles } = this.state; // Destructure state
+    return uploadedFiles.map(file => (
       <li key={file._id}>{file.name}</li>
     ));
   }
 
   renderProgressBar() {
-    if (!this.state.inProgress) {
+    const { inProgress, progress } = this.state; // Destructure state
+    if (!inProgress) {
       return null;
     }
 
     return (
       <div>
-        <div style={{ width: `${this.state.progress}%` }} className="progress-bar">
-          {this.state.progress}%
+        <div style={{ width: `${progress}%` }} className="progress-bar">
+          {progress}%
         </div>
       </div>
     );
   }
 
   render() {
+    const { inProgress } = this.state; // Destructure state
     return (
       <div>
-        <input type="file" onChange={this.handleFileUpload.bind(this)} disabled={this.state.inProgress} />
+        <input type="file" onChange={this.handleFileUpload.bind(this)} disabled={inProgress} />
         {this.renderProgressBar()}
         <ul>
           {this.renderUploadedFiles()}
