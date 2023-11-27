@@ -9,7 +9,7 @@ import AdminPaginationTable from '../components/AdminPaginationTable';
 import AdminAvgResp from '../components/AdminAvgResp';
 // eslint-disable-next-line no-unused-vars
 import AdminDragNDrop from '../components/AdminDragNDrop';
-import FileUploadComponent from '../components/FilesUpload';
+// import FileUploadComponent from '../components/FilesUpload';
 import FileManager from '../components/FileManager';
 
 /* Renders a table containing all of the Stuff documents. Use <AdminPaginationTableItem> to render each row. */
@@ -89,7 +89,7 @@ const AdminPage = () => {
 
           <AdminDragNDrop />
 
-          <FileUploadComponent />
+          {/* < FileUploadComponent /> */ }
           <FileManager />
         </Col>
       </Row>

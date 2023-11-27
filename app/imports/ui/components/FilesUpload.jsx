@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Table, Button, Modal } from 'react-bootstrap';
+import { Trash } from 'react-bootstrap-icons'; // Using Bootstrap icons
 import { MyFiles } from '../../api/fileupload/FilesCollection';
 import FileItem from './FileItem'; // Assuming FileItem is in the same directory
 
@@ -7,6 +9,8 @@ class FileUploadComponent extends Component {
     super(props);
     this.state = {
       uploadedFiles: [],
+      showModal: false,
+      fileToDelete: null,
     };
   }
 
@@ -52,11 +56,68 @@ class FileUploadComponent extends Component {
     ));
   }
 
+  showDeleteModal = (file) => {
+    this.setState({ showModal: true, fileToDelete: file });
+  };
+
+  confirmDelete = () => {
+    const { fileToDelete } = this.state;
+    if (fileToDelete) {
+      // Call delete method or perform deletion
+      console.log('Deleting:', fileToDelete._id);
+      this.handleFileRemove(fileToDelete._id);
+    }
+    this.setState({ showModal: false, fileToDelete: null });
+  };
+
+  renderTableBody() {
+    const { uploadedFiles } = this.state;
+    return uploadedFiles.map(file => (
+      <tr key={file._id}>
+        <td>{file.name}</td>
+        <td>{(file.size / 1024).toFixed(2)} KB</td>
+        <td>Status Placeholder</td>
+        <td>
+          <Button variant="danger" onClick={() => this.showDeleteModal(file)}>
+            <Trash />
+          </Button>
+        </td>
+      </tr>
+    ));
+  }
+
   render() {
     return (
       <div>
         <input type="file" onChange={this.handleFileUpload} />
-        <ul>{this.renderUploadedFiles()}</ul>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Filename</th>
+              <th>Size</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderTableBody()}
+          </tbody>
+        </Table>
+
+        <Modal show={this.state.showModal} onHide={() => this.setState({ showModal: false })}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Delete</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure you want to delete this file?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => this.setState({ showModal: false })}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={this.confirmDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
