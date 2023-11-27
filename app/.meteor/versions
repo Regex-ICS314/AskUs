@@ -62,6 +62,8 @@ montiapm:agent@2.47.3
 montiapm:meteorx@2.2.0
 npm-mongo@4.16.0
 ordered-dict@1.1.0
+ostrio:cookies@2.7.2
+ostrio:files@2.3.3
 promise@0.12.2
 raix:eventemitter@1.0.0
 random@1.2.1
