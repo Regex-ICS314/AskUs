@@ -10,6 +10,7 @@ import AdminAvgResp from '../components/AdminAvgResp';
 // eslint-disable-next-line no-unused-vars
 import AdminDragNDrop from '../components/AdminDragNDrop';
 import FileUploadComponent from '../components/FilesUpload';
+import FileManager from '../components/FileManager';
 
 /* Renders a table containing all of the Stuff documents. Use <AdminPaginationTableItem> to render each row. */
 const AdminPage = () => {
@@ -44,67 +45,54 @@ const AdminPage = () => {
   });
 
   return (
-    <Container>
-      <Container>
-        <p><a href="https://askuh.info">Home</a> &gt; Admin</p>
-      </Container>
-
-      <Row className="justify-content-center">
-        <h2 className="text-center pb-3" style={{ textDecoration: 'underline' }}>System Dashboard</h2>
+    <Container fluid>
+      <Row>
+        <Col>
+          <h2 className="text-center my-4" style={{ textDecoration: 'underline' }}>System Dashboard</h2>
+        </Col>
       </Row>
 
       <Row>
+        {/* Table and Charts Section */}
         <Col lg={6}>
           <AdminPaginationTable itemsPerPage={10} />
+          <Card className="mt-3">
+            <BarChartComponent data={testData} />
+          </Card>
         </Col>
 
-        <Col className="justify-content-md-center text-center" lg={6}>
-          <Row className="mb-3">
-            <Card>
-              <BarChartComponent data={testData} />
-            </Card>
-          </Row>
-          <Row>
+        {/* System Status and File Management Section */}
+        <Col lg={6}>
+          <Card className="mb-3">
+            <Card.Header><h5>Startup Requirements</h5></Card.Header>
+            <Card.Body>
+              <Row className="align-items-center">
+                <Col>
+                  <EmbeddedButton />
+                </Col>
+                <Col lg={2}>
+                  <StatusSquare complete={complete} size={1} />
+                </Col>
+              </Row>
+              <Row className="align-items-center mt-2">
+                <Col>
+                  <UpdateDatabaseButton />
+                </Col>
+                <Col lg={2}>
+                  <StatusSquare complete={complete2} />
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
 
-            <Col>
-              <Card>
-                <Card.Header>
-                  <Row className="g-0"><h5>Startup Requirements</h5></Row>
-                </Card.Header>
-                <Row className="text-center g-0 my-1">
-                  <Col>
-                    <EmbeddedButton />
-                  </Col>
-                  <Col lg={2}>
-                    <StatusSquare complete={complete} size={1} />
-                  </Col>
-                </Row>
+          <AdminAvgResp />
 
-                <Row className="text-center g-0 mb-1">
-                  <Col>
-                    <UpdateDatabaseButton />
-                  </Col>
-                  <Col lg={2}>
-                    <StatusSquare complete={complete2} />
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
-            <Col>
-              <AdminAvgResp />
-            </Col>
+          <AdminDragNDrop />
 
-          </Row>
-
-          <Row>
-            <AdminDragNDrop />
-          </Row>
-          <Row>
-            <FileUploadComponent />
-          </Row>
+          <FileUploadComponent />
+          <FileManager />
         </Col>
       </Row>
-
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
-import { MyFiles } from '../../api/fileupload/JsonFilesCollection';
+import { MyFiles } from '../../api/fileupload/FilesCollection';
 
 const baseStyle = {
   flex: 1,

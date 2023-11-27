@@ -7,5 +7,5 @@ import '/imports/startup/server/AskUsMethod.js';
 import '/imports/startup/server/FetchEmbedForUser.js';
 import '/imports/startup/server/AsUsCollectionIndexing.js';
 import '/imports/startup/server/AskUsUpdate.js';
-import '/imports/api/fileupload/JsonFilesCollection.js';
+import '/imports/api/fileupload/FilesCollection.js';
 import '/imports/startup/server/FileMethods.js';

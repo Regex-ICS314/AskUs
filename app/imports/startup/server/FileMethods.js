@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { MyFiles } from '../../api/fileupload/JsonFilesCollection';
+import { MyFiles } from '../../api/fileupload/FilesCollection';
 
 Meteor.methods({
   'files.remove'(fileId) {
