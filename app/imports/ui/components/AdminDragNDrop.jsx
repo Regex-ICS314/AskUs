@@ -107,7 +107,7 @@ const AdminDragNDrop = () => {
   ));
 
   return (
-    <Card className="m-1 p-2">
+    <Card className="m-1 p-2 shadow-lg p-3 mb-5 bg-body rounded ">
       <div
         {...getRootProps()}
         style={{ ...style, ...getRootProps().style }}

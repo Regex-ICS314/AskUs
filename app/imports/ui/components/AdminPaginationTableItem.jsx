@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const AdminPaginationTableItem = ({ page }) => {
   if (page) {
     return (
-      <tr>
+      <tr className="shadow-lg p-3 mb-5 bg-body rounded">
         <td>{page.filename}</td>
         <td>{page.question}</td>
         <td>{page.freq}</td>

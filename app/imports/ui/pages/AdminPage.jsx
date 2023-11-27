@@ -62,8 +62,8 @@ const AdminPage = () => {
         </Col>
 
         {/* System Status and File Management Section */}
-        <Col lg={6}>
-          <Card className="mb-3">
+        <Col lg={6} className="shadow-lg p-3 mb-5 bg-body rounded">
+          <Card className="shadow-lg p-3 mb-5 bg-body rounded">
             <Card.Header><h5>Startup Requirements</h5></Card.Header>
             <Card.Body>
               <Row className="align-items-center">
