@@ -59,36 +59,43 @@ const AdminPage = () => {
       <Row>
         <Col lg={6}>
           <AdminPaginationTable id="admin-pagination-table" itemsPerPage={10} />
-          <Card className="mt-3" id="bar-chart-card">
-            <BarChartComponent data={testData} />
-          </Card>
         </Col>
 
         <Col lg={6}>
-          <Card className="shadow-lg mb-5 bg-body rounded" id="status-card">
-            <Card.Header><h5>Startup Requirements</h5></Card.Header>
-            <Card.Body>
-              <Row className="align-items-center">
-                <Col>
-                  <EmbeddedButton id="embedded-button" />
-                </Col>
-                <Col lg={2}>
-                  <StatusSquare id="status-square-1" complete={complete} size={1} />
-                </Col>
-              </Row>
-              <Row className="align-items-center mt-2">
-                <Col>
-                  <UpdateDatabaseButton id="update-db-button" />
-                </Col>
-                <Col lg={2}>
-                  <StatusSquare id="status-square-2" complete={complete2} />
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
+          <Row className="mb-3">
+            <Card className="mt-3" id="bar-chart-card shadow-lg">
+              <BarChartComponent data={testData} />
+            </Card>
+          </Row>
 
-          <AdminAvgResp id="admin-avg-resp" />
-
+          <Row>
+            <Col>
+              <Card className="shadow-lg mb-5 bg-body rounded" id="status-card">
+                <Card.Header className="justify-content-md-center text-center"><h5>Startup Requirements</h5></Card.Header>
+                <Card.Body>
+                  <Row className="align-items-center">
+                    <Col>
+                      <EmbeddedButton id="embedded-button" />
+                    </Col>
+                    <Col lg={3}>
+                      <StatusSquare id="status-square-1" complete={complete} size={1} />
+                    </Col>
+                  </Row>
+                  <Row className="align-items-center mt-2">
+                    <Col>
+                      <UpdateDatabaseButton id="update-db-button" />
+                    </Col>
+                    <Col lg={3}>
+                      <StatusSquare id="status-square-2" complete={complete2} />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <AdminAvgResp id="admin-avg-resp" />
+            </Col>
+          </Row>
           <AdminDragNDrop id="admin-drag-n-drop" />
           <FileManager id="file-manager" />
         </Col>
