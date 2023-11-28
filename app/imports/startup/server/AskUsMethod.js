@@ -123,10 +123,10 @@ Meteor.methods({
     const stuff = AskUs.collection.find(
       { filename: 'An Eligible Student Guide to FERPA_0.pdf' },
     ).fetch();
-    let val = true;
-    if (!stuff[0].embedding) {
-      val = false;
+    // Check if there are any results in the stuff array
+    if (stuff.length === 0 || !stuff[0].embedding) {
+      return false;
     }
-    return val;
+    return true;
   },
 });

@@ -9,3 +9,4 @@ training/constants.py
 config/settings.development.json
 
 /.env
+/app/private/data/uploadedFiles/

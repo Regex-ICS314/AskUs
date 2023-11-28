@@ -5,6 +5,7 @@ import { AskUs } from '../../api/askus/AskUs';
 import { Messages } from '../../api/message/Messages';
 import { Sessions } from '../../api/session/Sessions';
 import { Visits } from '../../api/visit/Visits';
+import { MyFiles } from '../../api/fileupload/FilesCollection';
 
 // Publishes page visit collection.
 Meteor.publish(Visits.userPublicationName, function () {
@@ -57,4 +58,8 @@ Meteor.publish(Sessions.userPublicationName, function () {
     {},
     { sort: { sentAt: 1 } },
   );
+});
+
+Meteor.publish('files.all', function () {
+  return MyFiles.find().cursor;
 });
