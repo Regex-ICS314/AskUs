@@ -1,7 +1,5 @@
-import { Mongo } from 'meteor/mongo';
 import { Random } from 'meteor/random';
-
-const UserSessions = new Mongo.Collection('userSessions');
+import { UserSessions } from '../../../api/session/UserSessions';
 
 const createNewSession = (userId = null) => {
   // Generate a temporary user ID if none is provided
@@ -10,24 +8,24 @@ const createNewSession = (userId = null) => {
   const newSession = {
     userId: tempUserId,
     messages: [],
-    currentTopicEmbedding: null,
-    currentArticles: null,
+    currentTopicEmbedding: '',
+    currentArticles: '',
     createdAt: new Date(),
     lastUpdatedAt: new Date(),
     isTemporaryId: !userId, // Flag to indicate if this is a temporary session
   };
-  UserSessions.insert(newSession);
+  UserSessions.collection.insert(newSession);
   return newSession;
 };
 
-const getSession = (userId) => UserSessions.findOne({ userId }) || createNewSession(userId);
+const getSession = (userId) => UserSessions.collection.findOne({ userId }) || createNewSession(userId);
 
 const updateSession = (userId, updates) => {
-  UserSessions.update({ userId }, { $set: { ...updates, lastUpdatedAt: new Date() } });
+  UserSessions.collection.update({ userId }, { $set: { ...updates, lastUpdatedAt: new Date() } });
 };
 
 const deleteSession = (userId) => {
-  UserSessions.remove({ userId });
+  UserSessions.collection.remove({ userId });
 };
 
 // Function to handle temporary sessions

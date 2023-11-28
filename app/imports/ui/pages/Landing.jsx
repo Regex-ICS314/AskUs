@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import LandingSearch from '../components/LandingSearch';
 import FAQCards from '../components/FAQCards';
 import Notifications from '../components/Notifications';
-import { Sessions } from '../../api/session/Sessions';
+import { ChatSessions } from '../../api/session/ChatSessions';
 
 /* A simple component to render the landing page. */
 const Landing = () => {
@@ -15,7 +15,7 @@ const Landing = () => {
     if (!sessionId) {
       sessionId = uuidv4();
       sessionStorage.setItem('chatbotSessionId', sessionId);
-      Sessions.collection.insert(
+      ChatSessions.collection.insert(
         {
           latestQuery: 'temp',
           sentAt: sentAt,

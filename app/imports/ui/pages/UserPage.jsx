@@ -3,14 +3,14 @@ import { Meteor } from 'meteor/meteor';
 import { Button, Col, Container, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { v4 as uuidv4 } from 'uuid';
-import { Sessions } from '../../api/session/Sessions';
+import { ChatSessions } from '../../api/session/ChatSessions';
 import ChatHistory from '../components/ChatHistory';
 import LoadingBar from '../components/LoadingBar';
 
 const addSession = (sessionID) => {
   const sentAt = new Date();
   console.log(`New Session ${sessionID} added`);
-  Sessions.collection.insert(
+  ChatSessions.collection.insert(
     {
       latestQuery: '',
       sentAt: sentAt,
@@ -23,15 +23,15 @@ const addSession = (sessionID) => {
 
 const deleteSession = (sessionID) => {
   console.log(`Session ${sessionID} deleted`);
-  Sessions.collection.remove(sessionID);
+  ChatSessions.collection.remove(sessionID);
 };
 const UserPage = () => {
 
   const { ready, sessions } = useTracker(() => {
-    const subscription = Meteor.subscribe(Sessions.userPublicationName);
+    const subscription = Meteor.subscribe(ChatSessions.userPublicationName);
     const rdy = subscription.ready();
     const userToFind = Meteor.user() ? Meteor.user().username : 'notLoggedIn';
-    const sessionItems = Sessions.collection.find({ userId: userToFind }).fetch();
+    const sessionItems = ChatSessions.collection.find({ userId: userToFind }).fetch();
     sessionItems.sort((a, b) => a.date - b.date);
     return {
       sessions: sessionItems,
@@ -47,7 +47,7 @@ const UserPage = () => {
           <Table striped bordered hover>
             <tbody>
               {sessions.slice().reverse().map((session) => (
-                <ChatHistory key={session._id} session={session} collection={Sessions.collection} deleteSession={deleteSession} />
+                <ChatHistory key={session._id} session={session} collection={ChatSessions.collection} deleteSession={deleteSession} />
               ))}
             </tbody>
           </Table>

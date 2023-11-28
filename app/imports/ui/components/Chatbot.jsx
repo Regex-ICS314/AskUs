@@ -9,7 +9,7 @@ import ChatWindow from './ChatWindow';
 import ChatInput from './ChatInput';
 import { Messages } from '../../api/message/Messages';
 import SimilarArticles from './SimilarArticles';
-import { Sessions } from '../../api/session/Sessions';
+import { ChatSessions } from '../../api/session/ChatSessions';
 import { RespTimes } from '../../api/resptime/RespTimes';
 
 const ChatBox = (props) => {
@@ -50,11 +50,11 @@ const ChatBox = (props) => {
     Messages.collection.insert(
       { sender: 'user', message: userInput, feedback: 'none', sessionId: sessionId, userId: userId, sentAt: sentAt, stars: 0 },
     );
-    const sessionExists = Sessions.collection.find(sessionId);
+    const sessionExists = ChatSessions.collection.find(sessionId);
     if (!sessionExists) {
       console.log(`Session with id ${sessionId} does not exist`);
     }
-    Sessions.collection.update(sessionId, { $set: { latestQuery: userInput, sentAt: sentAt } }, (error) => (error ?
+    ChatSessions.collection.update(sessionId, { $set: { latestQuery: userInput, sentAt: sentAt } }, (error) => (error ?
       console.log('Session Fail to Update') :
       console.log('Session Updated')));
 

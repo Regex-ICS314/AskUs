@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import Chatbot from '../components/Chatbot';
-import { Sessions } from '../../api/session/Sessions';
+import { ChatSessions } from '../../api/session/ChatSessions';
 
 /* Page that contains the chatbot */
 const ChatbotPage = () => {
@@ -17,7 +17,7 @@ const ChatbotPage = () => {
     if (!sessionId) {
       sessionId = uuidv4();
       sessionStorage.setItem('chatbotSessionId', sessionId);
-      Sessions.collection.insert(
+      ChatSessions.collection.insert(
         {
           latestQuery: 'temp',
           sentAt: sentAt,

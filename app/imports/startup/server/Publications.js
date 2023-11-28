@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { check } from 'meteor/check';
 import { AskUs } from '../../api/askus/AskUs';
 import { Messages } from '../../api/message/Messages';
-import { Sessions } from '../../api/session/Sessions';
+import { ChatSessions } from '../../api/session/ChatSessions';
 import { Visits } from '../../api/visit/Visits';
 import { MyFiles } from '../../api/fileupload/FilesCollection';
 
@@ -56,8 +56,8 @@ Meteor.publish(Messages.userPublicationName, function () {
 });
 
 // Return all the history in the database sorted by latest date
-Meteor.publish(Sessions.userPublicationName, function () {
-  return Sessions.collection.find(
+Meteor.publish(ChatSessions.userPublicationName, function () {
+  return ChatSessions.collection.find(
     {},
     { sort: { sentAt: 1 } },
   );

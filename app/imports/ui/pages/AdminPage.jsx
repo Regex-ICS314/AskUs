@@ -10,6 +10,7 @@ import AdminAvgResp from '../components/AdminAvgResp';
 import AdminDragNDrop from '../components/AdminDragNDrop';
 // import FileUploadComponent from '../components/FilesUpload';
 import FileManager from '../components/FileManager';
+import AdminChatHistory from '../components/AdminChatHistory';
 
 /* Renders a table containing all of the Stuff documents. Use <AdminPaginationTableItem> to render each row. */
 const AdminPage = () => {
@@ -101,6 +102,11 @@ const AdminPage = () => {
           <AdminDragNDrop id="admin-drag-n-drop" />
           <FileManager id="file-manager" />
         </Col>
+      </Row>
+
+      <Row className="mb-3">
+        <h1>All History</h1>
+        <AdminChatHistory />
       </Row>
     </Container>
   );

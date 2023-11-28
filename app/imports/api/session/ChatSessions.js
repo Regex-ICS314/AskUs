@@ -1,10 +1,10 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-class SessionsCollection {
+class ChatSessionsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'SessionsCollection';
+    this.name = 'ChatSessionsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
@@ -29,4 +29,4 @@ class SessionsCollection {
  * The singleton instance of the SessionsCollection.
  * @type {SessionsCollection}
  */
-export const Sessions = new SessionsCollection();
+export const ChatSessions = new ChatSessionsCollection();
