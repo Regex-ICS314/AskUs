@@ -32,6 +32,7 @@ Meteor.methods({
     const startDate = new Date(current.getFullYear(), 0, 1);
     // day is out of 365.
     const day = Math.floor((current - startDate) / (24 * 60 * 60 * 1000));
+
     if (Visits.collection.find(
       { year: current.getFullYear(),
         day: day,
@@ -47,6 +48,27 @@ Meteor.methods({
       });
       return ('Created new date entry.');
     }
+
+    for (let i = 1; i < 20; i++) {
+      const prevDate = new Date(new Date().setDate(current.getDate() - i));
+
+      if (Visits.collection.find(
+        { year: current.getFullYear(),
+          day: day - i,
+        },
+      ).count() === 0) {
+        console.log(`Empty date ${day - i} not found in Visits collection. Initializing with default data.`);
+        addDataToVisits({
+          page: 'chatbot',
+          date: prevDate,
+          year: prevDate.getFullYear(),
+          day: day - i,
+          visitCount: 0,
+        });
+        console.log('Created new date entry.');
+      }
+    }
+
     const id = Visits.collection.find({ year: current.getFullYear(), day: day }).fetch()[0]._id;
     const visits = Visits.collection.find({ year: current.getFullYear(), day: day }).fetch()[0].visitCount;
     Visits.collection.update(id, { $set: { visitCount: visits + 1 } }, (error) => (error ?

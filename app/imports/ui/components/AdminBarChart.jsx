@@ -51,13 +51,15 @@ const BarChartComponent = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const items = Visits.collection.find().fetch();
+    const items = Visits.collection.find(
+      {},
+      { sort: { year: 1, day: 1 } },
+    ).fetch();
     let processedData;
     if (rdy) {
       processedData = processData(items);
       // console.log(processedData);
     }
-    // const testData = [{ label: 'Week 1', value: 13 }, { label: 'Week 2', value: 57 }, { label: 'Week 3', value: 32 }, { label: 'Week 4', value: 79 }];
     return {
       data: processedData,
       ready: rdy && processedData,

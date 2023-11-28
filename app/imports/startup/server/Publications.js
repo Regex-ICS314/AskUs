@@ -11,7 +11,7 @@ import { MyFiles } from '../../api/fileupload/FilesCollection';
 Meteor.publish(Visits.userPublicationName, function () {
   return Visits.collection.find(
     {},
-    { sort: { year: 1, day: 1 }, limit: 20 },
+    { sort: { year: -1, day: -1 }, limit: 15 },
   );
 });
 
