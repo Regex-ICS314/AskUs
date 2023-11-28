@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import crypto from 'crypto';
 import { Roles } from 'meteor/alanning:roles';
 import { AskUs } from '../../api/askus/AskUs.js';
-import openai from '/utils/OpenAiClient';
+import openai from './utils/OpenAiClient';
 import { MAX_TOKENS } from './utils/Constants';
 
 /* eslint-disable no-console */
