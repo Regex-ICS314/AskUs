@@ -58,7 +58,7 @@ const AdminPage = () => {
 
       <Row>
         <Col lg={6}>
-          <AdminPaginationTable id="admin-pagination-table" itemsPerPage={10} />
+          <AdminPaginationTable id="admin-pagination-table" itemsPerPage={12} />
         </Col>
 
         <Col lg={6}>

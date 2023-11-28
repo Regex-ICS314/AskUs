@@ -70,7 +70,7 @@ const AdminPaginationTable = ({ itemsPerPage }) => {
             pageRangeDisplayed={3}
             marginPagesDisplayed={3}
             // Change this to pageCount variable eventually, but it's super broken.
-            pageCount={56}
+            pageCount={47}
             previousLabel="< Prev"
             pageClassName="page-item"
             pageLinkClassName="page-link"
