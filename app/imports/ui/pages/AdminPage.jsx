@@ -45,7 +45,11 @@ const AdminPage = () => {
   });
 
   return (
-    <Container fluid>
+    <Container id="admin-page"> {/* Retained from HEAD branch */}
+      <Container>
+        <p><a href="https://askuh.info">Home</a> &gt; Admin</p>
+      </Container>
+
       <Row>
         <Col>
           <h2 className="text-center my-4" style={{ textDecoration: 'underline' }}>System Dashboard</h2>
@@ -53,44 +57,41 @@ const AdminPage = () => {
       </Row>
 
       <Row>
-        {/* Table and Charts Section */}
         <Col lg={6}>
-          <AdminPaginationTable itemsPerPage={10} />
-          <Card className="mt-3">
+          <AdminPaginationTable id="admin-pagination-table" itemsPerPage={10} /> {/* ID added */}
+          <Card className="mt-3" id="bar-chart-card"> {/* Assuming we keep the session-manager branch's chart, ID added */}
             <BarChartComponent data={testData} />
           </Card>
         </Col>
 
-        {/* System Status and File Management Section */}
         <Col lg={6}>
-          <Card className="shadow-lg p-3 mb-5 bg-body rounded">
+          {/* Combining elements from both branches for this section */}
+          <Card className="shadow-lg p-3 mb-5 bg-body rounded" id="status-card"> {/* ID added */}
             <Card.Header><h5>Startup Requirements</h5></Card.Header>
             <Card.Body>
               <Row className="align-items-center">
                 <Col>
-                  <EmbeddedButton />
+                  <EmbeddedButton id="embedded-button" /> {/* ID added */}
                 </Col>
                 <Col lg={2}>
-                  <StatusSquare complete={complete} size={1} />
+                  <StatusSquare id="status-square-1" complete={complete} size={1} /> {/* ID added */}
                 </Col>
               </Row>
               <Row className="align-items-center mt-2">
                 <Col>
-                  <UpdateDatabaseButton />
+                  <UpdateDatabaseButton id="update-db-button" /> {/* ID added */}
                 </Col>
                 <Col lg={2}>
-                  <StatusSquare complete={complete2} />
+                  <StatusSquare id="status-square-2" complete={complete2} /> {/* ID added */}
                 </Col>
               </Row>
             </Card.Body>
           </Card>
 
-          <AdminAvgResp />
+          <AdminAvgResp id="admin-avg-resp" /> {/* Keeping this from the session-manager branch, ID added */}
 
-          <AdminDragNDrop />
-
-          {/* < FileUploadComponent /> */ }
-          <FileManager />
+          <AdminDragNDrop id="admin-drag-n-drop" /> {/* ID added */}
+          <FileManager id="file-manager" /> {/* ID added */}
         </Col>
       </Row>
     </Container>
