@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
 import { MyFiles } from '../../api/fileupload/FilesCollection';
 
@@ -81,6 +81,10 @@ const AdminDragNDrop = () => {
     accept: { 'application/json': [] }, // Accept only JSON files
   });
 
+  // Destructure props from getRootProps and getInputProps
+  const { onKeyDown, onFocus, onBlur, onClick, onDragEnter, onDragOver, onDragLeave } = getRootProps();
+  const { type, accept, multiple } = getInputProps();
+
   const style = useMemo(() => ({
     ...baseStyle,
     ...(isFocused ? focusedStyle : {}),
@@ -108,17 +112,24 @@ const AdminDragNDrop = () => {
 
   return (
     <Card className="p-2 shadow-lg mb-3 bg-body rounded ">
-      <div
-        {...getRootProps()}
+      <Container
+        onKeyDown={onKeyDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onClick={onClick}
+        onDragEnter={onDragEnter}
+        onDragOver={onDragOver}
+        onDragLeave={onDragLeave}
+        onDrop={onDrop}
         style={{ ...style, ...getRootProps().style }}
       >
-        <input {...getInputProps()} />
+        <input className="visually-hidden" type={type} accept={accept} multiple={multiple} />
         <p>Click or drop files here to upload</p>
         {renderProgressBar()}
         <ul>
           { renderUploadedFiles() }
         </ul>
-      </div>
+      </Container>
     </Card>
   );
 };
