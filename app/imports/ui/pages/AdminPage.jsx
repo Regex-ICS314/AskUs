@@ -7,7 +7,6 @@ import EmbeddedButton from '../components/EmbeddedButton';
 import UpdateDatabaseButton from '../components/AskUsCollectionUpdateButton';
 import AdminPaginationTable from '../components/AdminPaginationTable';
 import AdminAvgResp from '../components/AdminAvgResp';
-// eslint-disable-next-line no-unused-vars
 import AdminDragNDrop from '../components/AdminDragNDrop';
 // import FileUploadComponent from '../components/FilesUpload';
 import FileManager from '../components/FileManager';
