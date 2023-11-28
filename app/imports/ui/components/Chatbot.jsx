@@ -11,8 +11,6 @@ import { Messages } from '../../api/message/Messages';
 import SimilarArticles from './SimilarArticles';
 import { Sessions } from '../../api/session/Sessions';
 import { RespTimes } from '../../api/resptime/RespTimes';
-// eslint-disable-next-line no-unused-vars
-import { Visits } from '../../api/visit/Visits';
 
 const ChatBox = (props) => {
   const { input } = props;
@@ -56,7 +54,6 @@ const ChatBox = (props) => {
     if (!sessionExists) {
       console.log(`Session with id ${sessionId} does not exist`);
     }
-    // eslint-disable-next-line no-use-before-define
     Sessions.collection.update(sessionId, { $set: { latestQuery: userInput, sentAt: sentAt } }, (error) => (error ?
       console.log('Session Fail to Update') :
       console.log('Session Updated')));
