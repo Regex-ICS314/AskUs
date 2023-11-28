@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Table, Button, Modal } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons'; // Using Bootstrap icons
 import { MyFiles } from '../../api/fileupload/FilesCollection';
-import FileItem from './FileItem'; // Assuming FileItem is in the same directory
 
 class FileUploadComponent extends Component {
   constructor(props) {
@@ -49,13 +48,6 @@ class FileUploadComponent extends Component {
     }));
   };
 
-  renderUploadedFiles() {
-    const { uploadedFiles } = this.state;
-    return uploadedFiles.map(file => (
-      <FileItem key={file._id} file={file} onRemove={this.handleFileRemove} />
-    ));
-  }
-
   showDeleteModal = (file) => {
     this.setState({ showModal: true, fileToDelete: file });
   };
@@ -87,6 +79,7 @@ class FileUploadComponent extends Component {
   }
 
   render() {
+    const { showModal } = this.state; // Destructuring state
     return (
       <div>
         <input type="file" onChange={this.handleFileUpload} />
@@ -104,7 +97,7 @@ class FileUploadComponent extends Component {
           </tbody>
         </Table>
 
-        <Modal show={this.state.showModal} onHide={() => this.setState({ showModal: false })}>
+        <Modal show={showModal} onHide={() => this.setState({ showModal: false })}>
           <Modal.Header closeButton>
             <Modal.Title>Confirm Delete</Modal.Title>
           </Modal.Header>
