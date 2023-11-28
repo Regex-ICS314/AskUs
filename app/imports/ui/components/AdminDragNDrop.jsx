@@ -8,8 +8,8 @@ const baseStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: '40px',
-  paddingBottom: '30px',
+  paddingTop: '50px',
+  paddingBottom: '20px',
   borderWidth: 1,
   borderRadius: 2,
   borderColor: '#eeeeee',
@@ -107,7 +107,7 @@ const AdminDragNDrop = () => {
   ));
 
   return (
-    <Card className="m-1 p-2 shadow-lg p-3 mb-5 bg-body rounded ">
+    <Card className="p-2 shadow-lg mb-3 bg-body rounded ">
       <div
         {...getRootProps()}
         style={{ ...style, ...getRootProps().style }}
