@@ -1,5 +1,5 @@
-// BarChartComponent.js
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import LoadingSpinner from './LoadingSpinner';
 import { Visits } from '../../api/visit/Visits';
 
 // Registering the required components for Chart.js
@@ -23,6 +24,25 @@ ChartJS.register(
   Legend,
 );
 
+const processData = (things) => {
+  const stuff = things.map((thing) => (
+    {
+      label: `${thing.date.getMonth() + 1}/${thing.date.toString().substring(8, 10)}/${thing.date.getFullYear()}`,
+      value: thing.visitCount,
+    }));
+  const chartData = {
+    labels: stuff.map(d => d.label),
+    datasets: [
+      {
+        label: 'Chatbot Page Views',
+        data: stuff.map(d => d.value),
+        backgroundColor: 'rgba(0, 123, 255, 0.5)',
+        borderWidth: 1,
+      },
+    ] };
+  return (chartData);
+};
+
 const BarChartComponent = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, data } = useTracker(() => {
@@ -32,24 +52,17 @@ const BarChartComponent = () => {
     const rdy = subscription.ready();
     // Get the Stuff documents
     const items = Visits.collection.find().fetch();
-    // Replace this when send times are implemented in message collection
-    const testData = [{ label: 'Week 1', value: 13 }, { label: 'Week 2', value: 57 }, { label: 'Week 3', value: 32 }, { label: 'Week 4', value: 79 }];
+    let processedData;
+    if (rdy) {
+      processedData = processData(items);
+      // console.log(processedData);
+    }
+    // const testData = [{ label: 'Week 1', value: 13 }, { label: 'Week 2', value: 57 }, { label: 'Week 3', value: 32 }, { label: 'Week 4', value: 79 }];
     return {
-      data: testData,
-      ready: rdy,
+      data: processedData,
+      ready: rdy && processedData,
     };
   }, []);
-  const chartData = {
-    labels: data.map(d => d.label),
-    datasets: [
-      {
-        label: 'Page Visits (Still fake data, will connect backend data to this later)',
-        data: data.map(d => d.value),
-        backgroundColor: 'rgba(0, 123, 255, 0.5)',
-        borderWidth: 1,
-      },
-    ],
-  };
 
   const options = {
     scales: {
@@ -59,7 +72,7 @@ const BarChartComponent = () => {
     },
   };
 
-  return <Bar data={chartData} options={options} />;
+  return ready ? (<Bar data={data} options={options} />) : (<LoadingSpinner />);
 };
 
 export default BarChartComponent;

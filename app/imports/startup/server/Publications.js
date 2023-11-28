@@ -9,7 +9,10 @@ import { MyFiles } from '../../api/fileupload/FilesCollection';
 
 // Publishes page visit collection.
 Meteor.publish(Visits.userPublicationName, function () {
-  return Visits.collection.find();
+  return Visits.collection.find(
+    {},
+    { sort: { year: 1, day: 1 }, limit: 20 },
+  );
 });
 
 // Publishes the top 8 most frequently visited sites.
