@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Card } from 'react-bootstrap';
 import BarChartComponent from '../components/AdminBarChart';
@@ -12,31 +11,12 @@ import AdminAvgResp from '../components/AdminAvgResp';
 import AdminDragNDrop from '../components/AdminDragNDrop';
 // import FileUploadComponent from '../components/FilesUpload';
 import FileManager from '../components/FileManager';
-import { Visits } from '../../api/visit/Visits';
 
 /* Renders a table containing all of the Stuff documents. Use <AdminPaginationTableItem> to render each row. */
 const AdminPage = () => {
-  const [graphData, setGraphData] = useState([]);
   const [buttons, setButtons] = useState(0);
   const [complete, setComplete] = useState(false);
   const [complete2, setComplete2] = useState(false);
-
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, data } = useTracker(() => {
-    // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Visits.userPublicationName);
-    // Determine if the subscription is ready
-    const rdy = subscription.ready();
-    // Get the Stuff documents
-    const items = Visits.collection.find().fetch();
-    // Replace this when send times are implemented in message collection
-    const testData = [{ label: 'Week 1', value: 13 }, { label: 'Week 2', value: 57 }, { label: 'Week 3', value: 32 }, { label: 'Week 4', value: 79 }];
-    setGraphData(testData);
-    return {
-      data: items,
-      ready: rdy,
-    };
-  }, []);
 
   const onsend = () => {
     // console.log('Button pressed.');
@@ -87,7 +67,7 @@ const AdminPage = () => {
         <Col lg={6}>
           <Row className="mb-3">
             <Card className="shadow-lg" id="bar-chart-card">
-              <BarChartComponent data={graphData} />
+              <BarChartComponent />
             </Card>
           </Row>
 
