@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
-import { Table, Button, Modal, Form, Container } from 'react-bootstrap';
+import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import { MyFiles } from '../../api/fileupload/FilesCollection';
 
@@ -106,7 +106,7 @@ class FileManager extends Component {
     const { showModal, showRenameModal, newName } = this.state;
 
     return (
-      <Container className="shadow-lg p-3 mb-5 bg-body rounded">
+      <Card className="shadow-lg p-3 mb-5 bg-body rounded">
         <h2>File Manager</h2>
         <Table striped bordered hover>
           <thead>
@@ -163,7 +163,7 @@ class FileManager extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </Container>
+      </Card>
     );
   }
 }

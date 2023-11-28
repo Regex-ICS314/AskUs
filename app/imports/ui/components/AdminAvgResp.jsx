@@ -22,7 +22,7 @@ const AdminAvgResp = () => {
   });
 
   return (
-    <Card className="text-center shadow-lg p-3 mb-5 bg-body rounded">
+    <Card className="text-center shadow-lg bg-body rounded">
       <Card.Header>
         <h5>Average Response Time</h5>
       </Card.Header>

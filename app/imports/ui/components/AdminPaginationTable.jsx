@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Container, Table, Col } from 'react-bootstrap';
 import AdminPaginationTableItem from './AdminPaginationTableItem';
-// eslint-disable-next-line no-unused-vars
 import LoadingSpinner from './LoadingSpinner';
 import { AskUs } from '../../api/askus/AskUs';
 
@@ -70,7 +69,7 @@ const AdminPaginationTable = ({ itemsPerPage }) => {
             pageRangeDisplayed={3}
             marginPagesDisplayed={3}
             // Change this to pageCount variable eventually, but it's super broken.
-            pageCount={56}
+            pageCount={47}
             previousLabel="< Prev"
             pageClassName="page-item"
             pageLinkClassName="page-link"

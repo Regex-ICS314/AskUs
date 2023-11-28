@@ -2,8 +2,9 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Button } from 'react-bootstrap';
 import swal from 'sweetalert';
+import PropTypes from 'prop-types';
 
-const UpdateDatabaseButton = () => {
+const UpdateDatabaseButton = ({ onsend }) => {
   const handleUpdateClick = async () => {
     try {
       // Fetch JSON data using a Meteor method
@@ -25,6 +26,8 @@ const UpdateDatabaseButton = () => {
     } catch (error) {
       swal('Error in handleUpdateClick', `${error}`, 'error');
     }
+
+    onsend();
   };
 
   return (
@@ -32,6 +35,10 @@ const UpdateDatabaseButton = () => {
       Update Database
     </Button>
   );
+};
+
+UpdateDatabaseButton.propTypes = {
+  onsend: PropTypes.func.isRequired,
 };
 
 export default UpdateDatabaseButton;

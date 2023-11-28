@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
+import PropTypes from 'prop-types';
 
-const EmbeddingButton = () => {
+const EmbeddingButton = ({ onsend }) => {
   const [loading, setLoading] = useState(false);
 
   const handleGenerateEmbeddings = () => {
@@ -17,6 +18,8 @@ const EmbeddingButton = () => {
       }
       setLoading(false);
     });
+
+    onsend();
   };
 
   return (
@@ -24,6 +27,10 @@ const EmbeddingButton = () => {
       {loading ? 'Generating Embeddings...' : 'Generate Embeddings'}
     </Button>
   );
+};
+
+EmbeddingButton.propTypes = {
+  onsend: PropTypes.func.isRequired,
 };
 
 export default EmbeddingButton;
