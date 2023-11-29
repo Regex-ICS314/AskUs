@@ -111,7 +111,7 @@ const AdminDragNDrop = () => {
   ));
 
   return (
-    <Card className="p-2 shadow-lg mb-3 bg-body rounded ">
+    <Card className="p-2 shadow-lg mb-3 bg-body rounded">
       <Container
         onKeyDown={onKeyDown}
         onFocus={onFocus}
