@@ -136,6 +136,12 @@ Meteor.methods({
     }
 
     // Update the session in the database
+    /*
+    console.log(typeof (userSession.messages));
+    console.log(typeof (userSession.currentTopicEmbedding));
+    console.log(typeof (userSession.currentArticles));
+    console.log(userSession.currentArticles);
+    */
     userSession.messages.push({ role: 'assistant', content: chatbotResponse });
     updateSession(userId, {
       messages: userSession.messages,

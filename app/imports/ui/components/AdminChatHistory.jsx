@@ -1,52 +1,35 @@
-import { Accordion } from 'react-bootstrap';
 import React from 'react';
-import ChatHistory from './ChatHistory';
-import { ChatSessions } from '../../api/session/ChatSessions';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { Accordion } from 'react-bootstrap';
+import { UserSessions } from '../../api/session/UserSessions';
+// eslint-disable-next-line import/no-named-as-default,import/no-named-as-default-member
+import UserSessionsAccordion from './UserSessionsAccordion';
 
-/*
-  const { ready, sessions } = useTracker(() => {
-    const subscription = Meteor.subscribe(ChatSessions.userPublicationName);
+// get a subscription of all the sessions grouped by userID, each index is an array of all the userId's sessions
+
+const AdminChatHistory = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { ready, users } = useTracker(() => {
+    const subscription = Meteor.subscribe(UserSessions.userPublicationName);
     const rdy = subscription.ready();
-    const userToFind = Meteor.user() ? Meteor.user().username : 'notLoggedIn';
-    const sessionItems = ChatSessions.collection.find({ userId: userToFind }).fetch();
-    sessionItems.sort((a, b) => a.date - b.date);
+    const userItems = UserSessions.collection.find({}).fetch();
+    // Extract user IDs from the userItems
+    const userIds = userItems.map(item => item.userId);
+    // Create a Set from the userIds to remove duplicates, then convert back to an array
+    const uniqueUserIds = [...new Set(userIds)];
     return {
-      sessions: sessionItems,
+      users: uniqueUserIds,
       ready: rdy,
     };
   }, []);
- */
-
- // get a subscription of all the sessions grouped by userID, each index is an array of all the userId's sessions
-
-const AdminChatHistory = () => {
+  // eslint-disable-next-line no-console
+  console.log(users);
   return (
-  // map the whole sessions grouped by ID into each accordion, which will each be a session, and when opening the session will open a table which will have the entire logs
-    <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-      </Accordion.Item>
-      <Accordion.Item eventKey="1">
-        <Accordion.Header>Accordion Item #2</Accordion.Header>
-        <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-      </Accordion.Item>
+    <Accordion>
+      {Array.isArray(users) && users.map((user, index) => (
+        <UserSessionsAccordion key={user._id} user={user} eventKey={index.toString()} />
+      ))}
     </Accordion>
   );
 };

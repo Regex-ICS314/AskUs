@@ -8,8 +8,8 @@ const createNewSession = (userId = null) => {
   const newSession = {
     userId: tempUserId,
     messages: [],
-    currentTopicEmbedding: '',
-    currentArticles: '',
+    currentTopicEmbedding: null,
+    currentArticles: null,
     createdAt: new Date(),
     lastUpdatedAt: new Date(),
     isTemporaryId: !userId, // Flag to indicate if this is a temporary session

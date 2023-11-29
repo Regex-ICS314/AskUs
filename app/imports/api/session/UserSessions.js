@@ -38,10 +38,33 @@ class UserSessionsCollection {
         optional: true,
       },
       currentTopicEmbedding: {
+        type: Array, // or Array if you want to accept arrays as well
+        optional: true,
+        defaultValue: null,
+      },
+      'currentTopicEmbedding.$': {
         type: String,
         optional: true,
       },
+
       currentArticles: {
+        type: Array, // or Array if you want to accept arrays as well
+        optional: true,
+        defaultValue: null,
+      },
+      'currentArticles.$': {
+        type: Object,
+        optional: true,
+      },
+      'currentArticles.$.filename': {
+        type: String,
+        optional: true,
+      },
+      'currentArticles.$.question': {
+        type: String,
+        optional: true,
+      },
+      'currentArticles.$.article_text': {
         type: String,
         optional: true,
       },

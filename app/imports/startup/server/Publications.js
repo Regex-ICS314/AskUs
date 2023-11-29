@@ -6,6 +6,7 @@ import { Messages } from '../../api/message/Messages';
 import { ChatSessions } from '../../api/session/ChatSessions';
 import { Visits } from '../../api/visit/Visits';
 import { MyFiles } from '../../api/fileupload/FilesCollection';
+import { UserSessions } from '../../api/session/UserSessions';
 
 // Publishes page visit collection.
 Meteor.publish(Visits.userPublicationName, function () {
@@ -65,4 +66,8 @@ Meteor.publish(ChatSessions.userPublicationName, function () {
 
 Meteor.publish('files.all', function () {
   return MyFiles.find().cursor;
+});
+
+Meteor.publish(UserSessions.userPublicationName, function () {
+  return UserSessions.collection.find();
 });
