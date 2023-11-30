@@ -41,7 +41,8 @@ const ChatWindow = React.forwardRef((props, ref) => {
     }
   };
   // Function to close the modal
-  const handleClose = () => {
+  const handleSubmit = () => {
+    Messages.collection.update(messageid)
     setShowModal(false);
   };
   const { ready, messages } = useTracker(() => {
@@ -92,7 +93,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
                       activeColor="#ffffff"
                     />
                     {/* Modal Component */}
-                    <Modal show={showModal} onHide={handleClose}>
+                    <Modal show={showModal} onHide={handleSubmit}>
                       <Modal.Header closeButton>
                         <Modal.Title>Feedback</Modal.Title>
                       </Modal.Header>
@@ -107,10 +108,10 @@ const ChatWindow = React.forwardRef((props, ref) => {
                         </Form>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
+                        <Button variant="secondary" onClick={handleSubmit}>
                           Close
                         </Button>
-                        <Button className="landingSearchButton" onClick={handleClose}>
+                        <Button className="feedback" onClick={handleSubmit}>
                           Submit Feedback
                         </Button>
                       </Modal.Footer>

@@ -184,10 +184,7 @@ footer {
   --bs-btn-active-bg: trasparent !important;
 
 }
-. {
+.footer {
   white-space: nowrap !important;
   background: #907139 !important;
-  border: 0 !important;
-  font-family: 'Open Sans', Tahoma, sans-serif !important;
-  padding: 8px 20px 10px !important;
 }
