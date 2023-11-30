@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Button, InputGroup } from 'react-bootstrap';
+import { Button, InputGroup, Modal, Form } from 'react-bootstrap';
 import { ArrowClockwise } from 'react-bootstrap-icons';
 import ReactStars from 'react-rating-stars-component';
 import ChatLoading from './ChatLoading';
@@ -29,12 +29,21 @@ const variants = {
   },
 };
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
-
 const ChatWindow = React.forwardRef((props, ref) => {
 
+  // State to manage modal visibility
+  const [showModal, setShowModal] = useState(false);
+
+  // Modify the ratingChanged function
+  const ratingChanged = (newRating) => {
+    if (newRating <= 2) {
+      setShowModal(true); // Show modal when rating is 2 or less
+    }
+  };
+  // Function to close the modal
+  const handleClose = () => {
+    setShowModal(false);
+  };
   const { ready, messages } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
@@ -82,6 +91,30 @@ const ChatWindow = React.forwardRef((props, ref) => {
                       size={24}
                       activeColor="#ffffff"
                     />
+                    {/* Modal Component */}
+                    <Modal show={showModal} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Feedback</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form>
+                          {/* Your form fields go here */}
+                          <Form.Group>
+                            <Form.Label>What did you find unsatisfactory?</Form.Label>
+                            <Form.Control as="textarea" placeholder="please type your feedback" />
+                          </Form.Group>
+                          {/* ... other form fields ... */}
+                        </Form>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                        <Button className="landingSearchButton" onClick={handleClose}>
+                          Submit Feedback
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                     <Button className="ms-auto refresh"><ArrowClockwise /></Button>
                   </InputGroup>
                 ) : ''}
