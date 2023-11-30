@@ -25,7 +25,7 @@ const ChatBox = (props) => {
     const { _id } = item;
     const freq = item.freq + amount;
     AskUs.collection.update(_id, { $set: { freq } }, (error) => (error ?
-      console.log('Error', error.message) :
+      console.log('Error', error.message, _id) :
       console.log(/* 'Success', `increased ${item.filename} freq by ${amount} (from ${item.freq} to ${freq})` */)));
   };
 
@@ -183,11 +183,11 @@ const ChatBox = (props) => {
   // Increases page visits (loads) by one
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
-    Meteor.call('increaseVisitCount', (error, result) => {
+    Meteor.call('increaseVisitCount', (error, result2) => {
       if (error) {
         console.error('Error increasing visit count:', error);
       } else {
-        // console.log(result);
+        // console.log(result2);
       }
     });
   }, []);

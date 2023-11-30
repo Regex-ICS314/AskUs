@@ -56,6 +56,14 @@ class UserSessionsCollection {
         type: Object,
         optional: true,
       },
+      'currentArticles.$._id': {
+        type: String,
+        optional: true,
+      },
+      'currentArticles.$.freq': {
+        type: Number,
+        optional: true,
+      },
       'currentArticles.$.filename': {
         type: String,
         optional: true,
