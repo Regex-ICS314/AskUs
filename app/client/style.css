@@ -172,19 +172,9 @@ footer {
   place-self: end;
 }
 
-/* chatbot refresh button */
-.refresh {
-  color: white !important; /* Change the color */
-  --bs-btn-color: white !important;
-  --bs-btn-bg: trasparent !important;
-  --bs-btn-border-color: trasparent !important;
-  --bs-btn-hover-color: trasparent !important;
-  --bs-btn-hover-bg: trasparent !important;
-  --bs-btn-hover-border-color: trasparent !important;
-  --bs-btn-active-bg: trasparent !important;
-
-}
-.footer {
+/* Styling for the feedback button */
+.feedback {
   white-space: nowrap !important;
   background: #907139 !important;
+  border-color: #907139 !important;
 }

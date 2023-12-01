@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Button, InputGroup, Modal, Form } from 'react-bootstrap';
-import { ArrowClockwise } from 'react-bootstrap-icons';
 import ReactStars from 'react-rating-stars-component';
 import ChatLoading from './ChatLoading';
 import { Messages } from '../../api/message/Messages';
@@ -48,6 +47,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
     // Update only the feedback, as stars are already updated
     Messages.collection.update(currentMessageId, { $set: { feedback: userInput } });
     setShowModal(false);
+    setUserInput(''); // Reset the input field after submitting feedback
   };
   const { ready, messages } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -126,7 +126,6 @@ const ChatWindow = React.forwardRef((props, ref) => {
                         </Button>
                       </Modal.Footer>
                     </Modal>
-                    <Button className="ms-auto refresh"><ArrowClockwise /></Button>
                   </InputGroup>
                 ) : ''}
               </motion.div>
