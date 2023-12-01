@@ -38,11 +38,9 @@ const ChatWindow = React.forwardRef((props, ref) => {
   const [currentMessageId, setCurrentMessageId] = useState(null);
   const ratingChanged = (rating, messageId) => {
     setCurrentMessageId(messageId);
+    Messages.collection.update(messageId, { $set: { stars: rating } });
     if (rating <= 2) {
       setShowModal(true); // Show the modal for ratings 1 or 2;
-    } else {
-      // Directly update the stars in the database for ratings 3 or more
-      Messages.collection.update(messageId, { $set: { stars: rating } });
     }
   };
   const handleClose = () => setShowModal(false);
