@@ -30,19 +30,25 @@ const variants = {
 };
 
 const ChatWindow = React.forwardRef((props, ref) => {
-
+  // State to hold user input
+  const [userInput, setUserInput] = useState('');
   // State to manage modal visibility
   const [showModal, setShowModal] = useState(false);
-
   // Modify the ratingChanged function
-  const ratingChanged = (newRating) => {
-    if (newRating <= 2) {
-      setShowModal(true); // Show modal when rating is 2 or less
+  const [currentMessageId, setCurrentMessageId] = useState(null);
+  const ratingChanged = (rating, messageId) => {
+    setCurrentMessageId(messageId);
+    if (rating <= 2) {
+      setShowModal(true); // Show the modal for ratings 1 or 2;
+    } else {
+      // Directly update the stars in the database for ratings 3 or more
+      Messages.collection.update(messageId, { $set: { stars: rating } });
     }
   };
-  // Function to close the modal
+  const handleClose = () => setShowModal(false);
   const handleSubmit = () => {
-    Messages.collection.update(messageid)
+    // Update only the feedback, as stars are already updated
+    Messages.collection.update(currentMessageId, { $set: { feedback: userInput } });
     setShowModal(false);
   };
   const { ready, messages } = useTracker(() => {
@@ -88,12 +94,12 @@ const ChatWindow = React.forwardRef((props, ref) => {
                   <InputGroup>
                     <ReactStars
                       count={5}
-                      onChange={ratingChanged}
+                      onChange={(rating) => ratingChanged(rating, message._id)}
                       size={24}
                       activeColor="#ffffff"
                     />
                     {/* Modal Component */}
-                    <Modal show={showModal} onHide={handleSubmit}>
+                    <Modal show={showModal} onHide={handleClose}>
                       <Modal.Header closeButton>
                         <Modal.Title>Feedback</Modal.Title>
                       </Modal.Header>
@@ -102,16 +108,22 @@ const ChatWindow = React.forwardRef((props, ref) => {
                           {/* Your form fields go here */}
                           <Form.Group>
                             <Form.Label>What did you find unsatisfactory?</Form.Label>
-                            <Form.Control as="textarea" placeholder="please type your feedback" />
+                            <Form.Control
+                              aria-describedby="basic-addon2"
+                              type="text"
+                              value={userInput}
+                              onChange={(e) => setUserInput(e.target.value)}
+                              placeholder="please type your feedback"
+                            />
                           </Form.Group>
                           {/* ... other form fields ... */}
                         </Form>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="secondary" onClick={handleSubmit}>
+                        <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
-                        <Button className="feedback" onClick={handleSubmit}>
+                        <Button className="feedback" onClick={() => handleSubmit(message._id)}>
                           Submit Feedback
                         </Button>
                       </Modal.Footer>
