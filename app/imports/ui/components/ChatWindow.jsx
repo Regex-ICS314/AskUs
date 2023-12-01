@@ -42,7 +42,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
       setShowModal(true); // Show the modal for ratings 1 or 2;
     }
   };
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => setShowModal(false); // Hide the modal when the user clicks on close
   const handleSubmit = () => {
     // Update only the feedback, as stars are already updated
     Messages.collection.update(currentMessageId, { $set: { feedback: userInput } });
