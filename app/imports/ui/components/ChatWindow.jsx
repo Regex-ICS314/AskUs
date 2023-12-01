@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Button, InputGroup } from 'react-bootstrap';
-import { ArrowClockwise } from 'react-bootstrap-icons';
+import { Button, InputGroup, Modal, Form } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
 import ChatLoading from './ChatLoading';
 import { Messages } from '../../api/message/Messages';
@@ -29,12 +28,27 @@ const variants = {
   },
 };
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
-
 const ChatWindow = React.forwardRef((props, ref) => {
-
+  // State to hold user input
+  const [userInput, setUserInput] = useState('');
+  // State to manage modal visibility
+  const [showModal, setShowModal] = useState(false);
+  // Modify the ratingChanged function
+  const [currentMessageId, setCurrentMessageId] = useState(null);
+  const ratingChanged = (rating, messageId) => {
+    setCurrentMessageId(messageId);
+    Messages.collection.update(messageId, { $set: { stars: rating } });
+    if (rating <= 2) {
+      setShowModal(true); // Show the modal for ratings 1 or 2;
+    }
+  };
+  const handleClose = () => setShowModal(false);
+  const handleSubmit = () => {
+    // Update only the feedback, as stars are already updated
+    Messages.collection.update(currentMessageId, { $set: { feedback: userInput } });
+    setShowModal(false);
+    setUserInput(''); // Reset the input field after submitting feedback
+  };
   const { ready, messages } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
@@ -78,11 +92,40 @@ const ChatWindow = React.forwardRef((props, ref) => {
                   <InputGroup>
                     <ReactStars
                       count={5}
-                      onChange={ratingChanged}
+                      onChange={(rating) => ratingChanged(rating, message._id)}
                       size={24}
                       activeColor="#ffffff"
                     />
-                    <Button className="ms-auto refresh"><ArrowClockwise /></Button>
+                    {/* Modal Component */}
+                    <Modal show={showModal} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Feedback</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form>
+                          {/* Your form fields go here */}
+                          <Form.Group>
+                            <Form.Label>What did you find unsatisfactory?</Form.Label>
+                            <Form.Control
+                              aria-describedby="basic-addon2"
+                              type="text"
+                              value={userInput}
+                              onChange={(e) => setUserInput(e.target.value)}
+                              placeholder="please type your feedback"
+                            />
+                          </Form.Group>
+                          {/* ... other form fields ... */}
+                        </Form>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                        <Button className="feedback" onClick={() => handleSubmit(message._id)}>
+                          Submit Feedback
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </InputGroup>
                 ) : ''}
               </motion.div>
