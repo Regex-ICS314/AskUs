@@ -8,7 +8,9 @@ import FAQCards from '../components/FAQCards';
 import Notifications from '../components/Notifications';
 import { ChatSessions } from '../../api/session/ChatSessions';
 
-/* A simple component to render the landing page. */
+/** Relatively basic component that assembles the components for landing into a full page.
+ * Also initiates session for user history.
+ * @returns A container with all necessary components for landing page. */
 const Landing = () => {
   useEffect(() => {
     const sentAt = new Date();
