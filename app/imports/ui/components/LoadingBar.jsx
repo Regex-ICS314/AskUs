@@ -2,6 +2,10 @@ import React from 'react';
 import { Container, Row, Col, ProgressBar } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+/** A component that displays a variable size loading bar based on input.
+ * @param {number} now - A number between 0 and 1 that displays the current progress of loading bar.
+ * @param {number} size - A parameter to pass the desired size to this component.
+ * @returns A container that says "Loading..." and a variable size progress bar. */
 const LoadingBar = (props) => {
   const { now, size } = props;
 
