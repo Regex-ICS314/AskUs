@@ -17,7 +17,7 @@ Meteor.publish(Visits.userPublicationName, function () {
 });
 
 /** Publishes the top 8 most frequently visited articles, for use in landing page cards.
- * @returns A pointer to the AskUs collection containing the top 8 most FAQ. */
+ * @returns Pointer to the AskUs collection containing the top 8 most FAQ. */
 Meteor.publish(AskUs.userPublicationName, function () {
   return AskUs.collection.find(
     {},
