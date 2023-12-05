@@ -12,7 +12,9 @@ import AdminDragNDrop from '../components/AdminDragNDrop';
 import FileManager from '../components/FileManager';
 import AdminChatHistory from '../components/AdminChatHistory';
 
-/* Renders a table containing all of the Stuff documents. Use <AdminPaginationTableItem> to render each row. */
+/** Renders a table containing all of the Stuff documents.
+ * Use <AdminPaginationTableItem> to render each row.
+ * @returns Container with all necessary components for landing page. */
 const AdminPage = () => {
   const [buttons, setButtons] = useState(0);
   const [complete, setComplete] = useState(false);

@@ -11,7 +11,7 @@ const mait = ['Scheduled Maintenance for apply.hawaii.edu (Jan 20)'];
 const notices = ['Notice: End of support for macOS 11 (Big Sur)'];
 
 /** A component that renders notifications for landing page, using react-toastify library.
- * @returns A ToastContainer that contains the settings for where toast notifications will appear. */
+ * @returns ToastContainer that contains the settings for where toast notifications will appear. */
 const Notifications = () => {
   // Sample toast calls
   /* toast.success('success');

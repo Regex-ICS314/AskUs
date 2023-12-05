@@ -7,6 +7,9 @@ import AdminPaginationTableItem from './AdminPaginationTableItem';
 import LoadingSpinner from './LoadingSpinner';
 import { AskUs } from '../../api/askus/AskUs';
 
+/** Renders a table containing all of the AskUs documents.
+ * Use <AdminPaginationTableItem> to render each row.
+ * @returns Container with all necessary components for landing page. */
 // eslint-disable-next-line react/prop-types
 const AdminPaginationTable = ({ itemsPerPage }) => {
   const [totalCount, setTotalCount] = useState(0);

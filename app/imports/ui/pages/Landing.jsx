@@ -10,7 +10,7 @@ import { ChatSessions } from '../../api/session/ChatSessions';
 
 /** Relatively basic component that assembles the components for landing into a full page.
  * Also initiates session for user history.
- * @returns A container with all necessary components for landing page. */
+ * @returns Container with all necessary components for landing page. */
 const Landing = () => {
   useEffect(() => {
     const sentAt = new Date();
