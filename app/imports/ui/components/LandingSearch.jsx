@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Container, Form, Col, Row } from 'react-bootstrap';
 
-/** Renders a search bar that accepts input and redirects user to chatbot page */
+/** Renders a search bar that accepts a form text input and redirects user to Chatbot page.
+ * It also stores the form text (userInput) in localStorage for use on Chatbot page.
+ * @returns A div containing a text form and submit button. */
 const LandingSearch = () => {
   const [userInput, setUserInput] = useState('');
 
