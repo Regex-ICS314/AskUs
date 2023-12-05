@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
-
+// Eslint unused disabled in case different effect wants to be used.
+// eslint-disable-next-line no-unused-vars
 import { ToastContainer, toast, Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
