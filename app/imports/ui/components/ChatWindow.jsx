@@ -39,7 +39,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
     setCurrentMessageId(messageId);
     Messages.collection.update(messageId, { $set: { stars: rating } });
     if (rating <= 5) {
-      setShowModal(true); // Show the modal for ratings 1 or 2;
+      setShowModal(true); // Show the modal for when user wants to provide feedback;
     }
   };
   const handleClose = () => setShowModal(false); // Hide the modal when the user clicks on close
@@ -103,7 +103,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
                       </Modal.Header>
                       <Modal.Body>
                         <Form>
-                          {/* Your form fields go here */}
+                          {/* Form fields go here */}
                           <Form.Group>
                             <Form.Label>What is your feedback?</Form.Label>
                             <Form.Control
@@ -114,7 +114,6 @@ const ChatWindow = React.forwardRef((props, ref) => {
                               placeholder="please enter your feedback here"
                             />
                           </Form.Group>
-                          {/* ... other form fields ... */}
                         </Form>
                       </Modal.Body>
                       <Modal.Footer>

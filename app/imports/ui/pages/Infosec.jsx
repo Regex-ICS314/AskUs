@@ -2,7 +2,9 @@ import React from 'react';
 import { Col, Container, Image, Row, Stack } from 'react-bootstrap';
 import { BuildingFillGear, CardChecklist, MortarboardFill, Newspaper, PersonBadgeFill, PersonFill, PersonVcardFill, PersonVideo2, Server, TelephonePlusFill } from 'react-bootstrap-icons';
 
-/* A simple component to render the landing page. */
+/** Page that provides the security policies that our website conforms to.
+ * based off of the current security policies of the University of Hawaii.
+ * @returns A container with all necessary components for infosec page. */
 const Infosec = () => (
   <Container id="infosec-page">
     <Row>
