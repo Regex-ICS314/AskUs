@@ -12,14 +12,14 @@ import AdminDragNDrop from '../components/AdminDragNDrop';
 import FileManager from '../components/FileManager';
 import AdminChatHistory from '../components/AdminChatHistory';
 
-/** Renders a table containing all of the Stuff documents.
- * Use <AdminPaginationTableItem> to render each row.
- * @returns Container with all necessary components for landing page. */
+/** Component that assembles the components for admin dashboard into a full page.
+ * @returns Container with all necessary components for admin page. */
 const AdminPage = () => {
   const [buttons, setButtons] = useState(0);
   const [complete, setComplete] = useState(false);
   const [complete2, setComplete2] = useState(false);
 
+  // Function to help update status squares when buttons clicked.
   const onsend = () => {
     // console.log('Button pressed.');
     setButtons(buttons + 1);
