@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
@@ -45,7 +45,7 @@ const SignIn = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
-            <h2>Please login to access</h2>
+            <h2>Login to your account</h2>
           </Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
@@ -57,6 +57,9 @@ const SignIn = () => {
               </Card.Body>
             </Card>
           </AutoForm>
+          <Alert variant="light">
+            <Link to="/signup">Click here to Register</Link>
+          </Alert>
           {error === '' ? (
             ''
           ) : (
