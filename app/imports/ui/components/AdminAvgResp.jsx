@@ -2,10 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
-/** Displays average response time */
+/** Small component that displays the average response time of the chatbot.
+ * @returns Card that displays average response time in seconds. */
 const AdminAvgResp = () => {
   const [respTime, setRespTime] = useState(0);
 
+  // Meteor method that fetches average response time from server.
   useEffect(() => {
     Meteor.call('getAvgRespTime', (error, result) => {
       if (error) {

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/** Renders a single row in the FAQStats (Admin) table. See pages/AdminPage.jsx. */
+/** Renders a single row for the table in AdminPaginationTable.jsx.
+ * @returns Row (tr) of a table containing passed in information, or nothing otherwise. */
 const AdminPaginationTableItem = ({ page }) => {
   if (page) {
     return (
