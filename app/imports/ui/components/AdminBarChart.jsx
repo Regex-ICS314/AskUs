@@ -26,7 +26,7 @@ ChartJS.register(
 
 /** Helper function that processes the information from database for graph.
  * @param {object} things - Information to be processed into graph format.
- * @returns object with processed, graph-ready data. */
+ * @returns Object - Object with processed, graph-ready data. */
 const processData = (things) => {
   // Formats data for graph.
   const stuff = things.map((thing) => (
@@ -51,7 +51,7 @@ const processData = (things) => {
 };
 
 /** Renders a bar chart containing daily page visitors for last 20 days.
- * @returns Bar chart with daily visitors. */
+ * @returns Bar - Bar chart with daily visitors. */
 const BarChartComponent = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, data } = useTracker(() => {

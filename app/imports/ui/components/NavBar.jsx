@@ -5,7 +5,6 @@ import { Button, Col, Container, Image, Nav, Navbar, Row, NavDropdown, InputGrou
 import { BoxArrowRight, Facebook, Instagram, List, PersonFill, PersonPlusFill, Search, Twitter, Youtube } from 'react-bootstrap-icons';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-// import EmbeddedButton from './EmbeddedButton'; // TODO: Remove this line when you remove the EmbeddedButton component.
 
 const NavBar = () => {
 // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
