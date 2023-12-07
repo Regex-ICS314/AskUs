@@ -1,19 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { RespTimes } from '../../api/resptime/RespTimes';
-// eslint-disable-next-line no-unused-vars
 import { Visits } from '../../api/visit/Visits';
 
 /* eslint-disable no-console */
 
-// Function to add data to the Visits collection.
+/** Helper function to add data to the Visits collection.
+ * @param {object} data - Object containing data to be added. */
 const addDataToVisits = (data) => {
   console.log(`Adding: ${data.page} (Visits: ${data.visitCount})`);
   Visits.collection.insert(data);
 };
 
 Meteor.methods({
-  // Gets the average amount of time it takes for chatbot to respond using RespTimes collection.
+  /** If user is an admin, returns the average amount of time it takes for chatbot to respond using RespTimes collection.
+   * @returns number - Average response time of chatbot. */
   getAvgRespTime() {
     if (Roles.userIsInRole(this.userId, 'admin')) {
       let total = 0;
@@ -27,12 +28,14 @@ Meteor.methods({
     return (0);
   },
 
+  /** Helper function to increment visit count when someone visits chatbot page. Also initializes data if needed. */
   increaseVisitCount() {
     const current = new Date();
     const startDate = new Date(current.getFullYear(), 0, 1);
     // day is out of 365.
     const day = Math.floor((current - startDate) / (24 * 60 * 60 * 1000));
 
+    // Creates a new date in Visits collection if current date not found.
     if (Visits.collection.find(
       { year: current.getFullYear(),
         day: day,
@@ -46,9 +49,10 @@ Meteor.methods({
         day: day,
         visitCount: 1,
       });
-      return ('Created new date entry.');
+      console.log('Created new date entry.');
     }
 
+    // Adds date data with zero for visitCount for last 20 days if not found (for graphing purposes).
     for (let i = 1; i < 20; i++) {
       const prevDate = new Date(new Date().setDate(current.getDate() - i));
 

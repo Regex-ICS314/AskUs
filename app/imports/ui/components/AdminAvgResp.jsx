@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
 /** Small component that displays the average response time of the chatbot.
- * @returns Card that displays average response time in seconds. */
+ * @returns Card - Card that displays average response time in seconds. */
 const AdminAvgResp = () => {
   const [respTime, setRespTime] = useState(0);
 

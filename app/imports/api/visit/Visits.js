@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
+/** Collection to track the amount of page visits of the chatbot page, to be displayed on admin dashboard. */
 class VisitCollection {
   constructor() {
     // The name of this collection.

@@ -13,13 +13,13 @@ import FileManager from '../components/FileManager';
 import AdminChatHistory from '../components/AdminChatHistory';
 
 /** Component that assembles the components for admin dashboard into a full page.
- * @returns Container with all necessary components for admin page. */
+ * @returns Container - Container with all necessary components for admin page. */
 const AdminPage = () => {
   const [buttons, setButtons] = useState(0);
   const [complete, setComplete] = useState(false);
   const [complete2, setComplete2] = useState(false);
 
-  // Function to help update status squares when buttons clicked.
+  // Helper function to help update status squares when buttons clicked.
   const onsend = () => {
     // console.log('Button pressed.');
     setButtons(buttons + 1);

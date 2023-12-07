@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /** Renders a single row for the table in AdminPaginationTable.jsx.
+ * @param {object} page - Object containing article data to be displayed.
  * @returns Row (tr) of a table containing passed in information, or nothing otherwise. */
 const AdminPaginationTableItem = ({ page }) => {
   if (page) {
