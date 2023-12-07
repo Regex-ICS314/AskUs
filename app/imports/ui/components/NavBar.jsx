@@ -1,11 +1,14 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Button, Col, Container, Image, Nav, Navbar, Row, NavDropdown, InputGroup, FormControl } from 'react-bootstrap';
-import { BoxArrowRight, Facebook, Instagram, List, PersonFill, PersonPlusFill, Search, Twitter, Youtube } from 'react-bootstrap-icons';
+import { Col, Container, Image, Nav, Navbar, Row, NavDropdown } from 'react-bootstrap';
+import { BoxArrowRight, Facebook, Instagram, List, PersonFill, PersonPlusFill, Twitter, Youtube } from 'react-bootstrap-icons';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 
+/** Component that Loads the navbar for all pages.
+ * a mix of the UH website navbar and our own additions to the navbar.
+ * Rendered by the App Layout component. */
 const NavBar = () => {
 // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { currentUser } = useTracker(() => ({
@@ -14,6 +17,7 @@ const NavBar = () => {
 
   return (
     <div>
+      {/* the top Navbar based on the UH website */}
       <Navbar className="navbarColor" expand="lg">
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav">Navigation <List /></Navbar.Toggle>
@@ -61,12 +65,13 @@ const NavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="logo">
+      {/* Logo for the UH website */}
+      <div>
         <Container>
           <Row>
-            <Col lg={7} className="mt-4 ms-2">
+            <Col lg={7} className="mt-4 ms-2 mb-5">
               <Container>
-                {/* Show this image on extra small screens */}
+                {/* Show this image on extra-small screens */}
                 <Image
                   src="/images/uh-nameplate.png"
                   alt="Image for Extra Small Screens"
@@ -83,20 +88,9 @@ const NavBar = () => {
                 />
               </Container>
             </Col>
-            <Col className="m-5">
-              <InputGroup className="mb-3 siteSearch">
-                <FormControl
-                  placeholder="Site Search"
-                  aria-describedby="basic-addon2"
-                  className="search-boarder"
-                />
-                <Button id="button-addon2" className="search">
-                  <Search />
-                </Button>
-              </InputGroup>
-            </Col>
           </Row>
         </Container>
+        {/* Banner for the Department of technology for UH */}
         <div className="gray-background">
           <Container>
             <Nav variant="underline" className="bottom-nav"><Nav.Link className="ms-2" href="https://www.hawaii.edu/its"><h3>Information Technology Services</h3></Nav.Link></Nav>
@@ -104,6 +98,8 @@ const NavBar = () => {
           </Container>
         </div>
       </div>
+      {/* Our own navbar that includes the components and pages that
+       we personally had added */}
       <div className="bottom-nav">
         <Navbar expand="lg">
           <Container>

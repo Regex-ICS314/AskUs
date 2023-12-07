@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import { Mic } from 'react-bootstrap-icons';
+// import { Mic } from 'react-bootstrap-icons';
 
 const ChatInput = React.forwardRef((props, ref) => {
   const { userInput, setUserInput, handleSend, loading } = props;
@@ -19,7 +19,8 @@ const ChatInput = React.forwardRef((props, ref) => {
             aria-label="User input"
             className="search-boarder"
           />
-          <Button variant="link" type="submit" className="ms-2 search"><Mic /></Button>
+          { /* <Button variant="link" type="submit" className="ms-2 search"><Mic /></Button>
+             component that renders the Mic icon for speech to text */ }
         </InputGroup>
         <Button type="submit" className="ms-2" style={{ backgroundColor: '#907139' }} disabled={loading}>Send</Button>
       </div>
