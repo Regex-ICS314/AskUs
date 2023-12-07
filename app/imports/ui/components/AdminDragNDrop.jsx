@@ -3,6 +3,7 @@ import { Card, Container } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
 import { MyFiles } from '../../api/fileupload/FilesCollection';
 
+// Styling for dropzone.
 const baseStyle = {
   flex: 1,
   display: 'flex',
@@ -32,12 +33,14 @@ const rejectStyle = {
   borderColor: '#ff1744',
 };
 
-// This component renders a drag and drop zone for the admin page (DOES NOT CURRENTLY UPLOAD ANYTHING)
+/** This component renders a drag and drop upload zone for the admin page, enabling uploads to database.
+ * @returns Card containing a dropzone container that uploads files. */
 const AdminDragNDrop = () => {
   const [progress, setProgress] = useState(0);
   const [inProgress, setInProgress] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
+  // Handles file upload event.
   const onDrop = (acceptedFiles) => {
     // Assuming you want to upload the first accepted file
     if (acceptedFiles[0]) {
@@ -92,6 +95,7 @@ const AdminDragNDrop = () => {
     ...(isDragReject ? rejectStyle : {}),
   }), [isFocused, isDragAccept, isDragReject]);
 
+  // Renders a progress bar.
   const renderProgressBar = () => {
     if (!inProgress) return null;
     return (
@@ -103,6 +107,7 @@ const AdminDragNDrop = () => {
     );
   };
 
+  // Renders which files have been uploaded in dropzone container.
   const renderUploadedFiles = () => uploadedFiles.map(file => (
     <li key={file._id}>
       {file.name}

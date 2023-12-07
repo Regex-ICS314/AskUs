@@ -3,6 +3,7 @@ import { Col, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+// Helper function that fades in the section title, but displays nothing if invisible so there's no empty space.
 const helper = (opacity) => {
   if (opacity !== 0) {
     return (<h5 className="mb-3" style={{ opacity: opacity }}>Relevant Articles</h5>);

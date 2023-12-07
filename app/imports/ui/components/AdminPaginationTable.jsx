@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Container, Table, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import AdminPaginationTableItem from './AdminPaginationTableItem';
 import LoadingSpinner from './LoadingSpinner';
 import { AskUs } from '../../api/askus/AskUs';
 
-// eslint-disable-next-line react/prop-types
+/** Renders a table containing all of the AskUs documents in increments.
+ * Use <AdminPaginationTableItem> to render each row.
+ * @param {number} itemsPerPage - Number of objects to be displayed per page.
+ * @returns Container - Container with a table and pagination bar of AskUs documents. */
 const AdminPaginationTable = ({ itemsPerPage }) => {
   const [totalCount, setTotalCount] = useState(0);
   // eslint-disable-next-line no-unused-vars
@@ -26,17 +30,17 @@ const AdminPaginationTable = ({ itemsPerPage }) => {
     });
   }, []);
 
-  // eslint-disable-next-line no-unused-vars
-  const { ready, pages } = useTracker(() => {
+  const { pages } = useTracker(() => {
     // Retrieve data for pagination table from mongodb.
     // const endOffset = itemOffset + itemsPerPage;
     // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    // Kept subscription variable in case need to check ready.
+    // eslint-disable-next-line no-unused-vars
     const subscription = Meteor.subscribe(AskUs.adminPublicationName, itemOffset, itemsPerPage);
     const tableItems = AskUs.collection.find().fetch();
     setPageCount(Math.ceil(totalCount / itemsPerPage));
     return {
       pages: tableItems,
-      ready: subscription.ready(),
     };
   }, [itemOffset]);
 
@@ -88,6 +92,11 @@ const AdminPaginationTable = ({ itemsPerPage }) => {
       </Col>
     </Container>
   );
+};
+
+// Require a document to be passed to this component.
+AdminPaginationTable.propTypes = {
+  itemsPerPage: PropTypes.number.isRequired,
 };
 
 export default AdminPaginationTable;

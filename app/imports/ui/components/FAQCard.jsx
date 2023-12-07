@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-/** Renders a single card w/ information for FAQ */
+/** Renders a single card w/ information for FAQCards component.
+ * @param {object} article - An object with information to be displayed.
+ * @returns Card with a single article's information. */
 const FAQCard = ({ article }) => {
   const text = `${article.article_text.substring(0, 200)}...`;
 

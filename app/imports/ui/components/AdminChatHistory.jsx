@@ -8,6 +8,8 @@ import UserSessionsAccordion from './UserSessionsAccordion';
 
 // get a subscription of all the sessions grouped by userID, each index is an array of all the userId's sessions
 
+/** Component that renders the chat history of all users on admin page.
+ * @returns Accordion with a section for each user in database's chatbase. */
 const AdminChatHistory = () => {
   // eslint-disable-next-line no-unused-vars
   const { ready, users } = useTracker(() => {

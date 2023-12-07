@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
+/** Collection to track the response times of the chatbot, to be displayed on admin dashboard. */
 class TimeCollection {
   constructor() {
     // The name of this collection.

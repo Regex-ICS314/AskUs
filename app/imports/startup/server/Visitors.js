@@ -6,7 +6,7 @@ import { Visits } from '../../api/visit/Visits';
 
 /* eslint-disable no-console */
 
-// Function to add data to the Visits collection.
+// Helper function to add data to the Visits collection.
 const addDataToVisits = (data) => {
   console.log(`Adding: ${data.pageName} (Visits: ${data.visitCount})`);
   Visits.collection.insert(data);

@@ -20,7 +20,7 @@ const ChatBox = (props) => {
   const [opacity, setOpacity] = useState(0);
   const [userLanguage, setUserLanguage] = useState('english');
 
-  // Increases the freq attribute in the Askus database for selected item.
+  // Helper function that increases the freq attribute in the Askus database for selected item.
   const increaseFreq = (item, amount) => {
     const { _id } = item;
     const freq = item.freq + amount;
@@ -29,7 +29,7 @@ const ChatBox = (props) => {
       console.log(/* 'Success', `increased ${item.filename} freq by ${amount} (from ${item.freq} to ${freq})` */)));
   };
 
-  // Function to add data to the RespTimes collection.
+  // Helper function to add data to the RespTimes collection.
   const addDataToRespTimes = (data) => {
     // console.log(`Adding time: ${data.start} to ${data.end}, approx. ${data.responseTimeMs}ms. (User Input: "${data.input}")`);
     RespTimes.collection.insert(data);

@@ -8,7 +8,8 @@ import { Visits } from '../../api/visit/Visits';
 import { MyFiles } from '../../api/fileupload/FilesCollection';
 import { UserSessions } from '../../api/session/UserSessions';
 
-// Publishes page visit collection, for use in admin page.
+/** Publishes the most recent 15 days of the page visit collection, for use in admin page graph.
+ * @returns Pointer - Pointer to the Visit collection containing the 15 most recent days. */
 Meteor.publish(Visits.userPublicationName, function () {
   return Visits.collection.find(
     {},
@@ -17,7 +18,7 @@ Meteor.publish(Visits.userPublicationName, function () {
 });
 
 /** Publishes the top 8 most frequently visited articles, for use in landing page cards.
- * @returns A pointer to the AskUs collection containing the top 8 most FAQ. */
+ * @returns Pointer - Pointer to the AskUs collection containing the top 8 most FAQ. */
 Meteor.publish(AskUs.userPublicationName, function () {
   return AskUs.collection.find(
     {},
@@ -25,8 +26,10 @@ Meteor.publish(AskUs.userPublicationName, function () {
   );
 });
 
-// Admin-level publication.
-// If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
+/** If logged in and with admin role, then publish a subset of the AskUs collection based on input.
+ * @param {number} start - Starting index of articles to be published.
+ * @param {number} num - Amount of articles to be published.
+ * @returns Pointer - Pointer to the AskUs collection containing requested subset of collection. */
 Meteor.publish(AskUs.adminPublicationName, function (start, num) {
   check(start, Number);
   check(num, Number);

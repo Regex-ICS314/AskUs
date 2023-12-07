@@ -24,12 +24,18 @@ ChartJS.register(
   Legend,
 );
 
+/** Helper function that processes the information from database for graph.
+ * @param {object} things - Information to be processed into graph format.
+ * @returns Object - Object with processed, graph-ready data. */
 const processData = (things) => {
+  // Formats data for graph.
   const stuff = things.map((thing) => (
     {
       label: `${thing.date.getMonth() + 1}/${thing.date.toString().substring(8, 10)}/${thing.date.getFullYear()}`,
       value: thing.visitCount,
     }));
+
+  // Sets options for graph.
   const chartData = {
     labels: stuff.map(d => d.label),
     datasets: [
@@ -40,17 +46,20 @@ const processData = (things) => {
         borderWidth: 1,
       },
     ] };
+
   return (chartData);
 };
 
+/** Renders a bar chart containing daily page visitors for last 20 days.
+ * @returns Bar - Bar chart with daily visitors. */
 const BarChartComponent = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, data } = useTracker(() => {
-    // Get access to Stuff documents.
+    // Get access to Visits documents.
     const subscription = Meteor.subscribe(Visits.userPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
+    // Get the Visit documents
     const items = Visits.collection.find(
       {},
       { sort: { year: 1, day: 1 } },
@@ -66,6 +75,7 @@ const BarChartComponent = () => {
     };
   }, []);
 
+  // Additional options for barchart.
   const options = {
     scales: {
       y: {

@@ -94,8 +94,9 @@ Meteor.methods({
     console.log('All embeddings have been processed.'); // Log when all articles have been processed
   },
 
+  /** If user is logged in as admin, returns the total number of documents in AskUs (used for admin table).
+   * @returns number - Number of documents in AskUs collection. */
   getItemsCount() {
-    // Calculate the count on the server
     if (Roles.userIsInRole(this.userId, 'admin')) {
       const count = AskUs.collection.find().count();
       return count;
@@ -103,7 +104,8 @@ Meteor.methods({
     return ('');
   },
 
-  // Checks if the embeddings of the first 10 items in the AskUs collection exist.
+  /** Checks if the embeddings of the first 10 items in the AskUs collection exist.
+   * @returns boolean - true if all embeddings exist, otherwise false. */
   embedExist() {
     const stuff = AskUs.collection.find(
       {},
@@ -118,7 +120,8 @@ Meteor.methods({
     return val;
   },
 
-  // Checks if the embeddings of the new data exists.
+  /** Checks if the embeddings of the new data exists, via FERPA.
+   * @returns boolean - true if all embeddings exist, otherwise false. */
   otherDbExist() {
     const stuff = AskUs.collection.find(
       { filename: 'An Eligible Student Guide to FERPA_0.pdf' },
