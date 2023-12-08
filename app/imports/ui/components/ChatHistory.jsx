@@ -4,14 +4,21 @@ import PropTypes from 'prop-types';
 import { Trash } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
-const ChatHistory = ({ session, deleteSession }) => {
+// eslint-disable-next-line react/prop-types
+const ChatHistory = ({ session, deleteSession, adminMode, user }) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-
-  const handleRowClick = () => {
+  const handleRowClickUser = () => {
     navigate('/chatbot');
     console.log(`Current Session ID: ${session._id}`);
     sessionStorage.setItem('chatbotSessionId', session._id);
+  };
+
+  const handleRowClickAdmin = () => {
+    navigate('/admin/usermessages');
+    console.log('admin mode');
+    localStorage.setItem('userForViewingHistory', user);
+    localStorage.setItem('sessionForViewingHistory', session._id);
   };
 
   // Convert the date to a string
@@ -25,7 +32,7 @@ const ChatHistory = ({ session, deleteSession }) => {
       style={{ background: '#907139' }}
     >
       <Col
-        onClick={handleRowClick}
+        onClick={adminMode ? handleRowClickAdmin : handleRowClickUser}
         className={`${isHovered ? 'text-primary' : 'text-dark'}`}
       >
         <h5>{session.latestQuery}</h5>
@@ -47,6 +54,8 @@ ChatHistory.propTypes = {
     sentAt: PropTypes.instanceOf(Date),
     _id: PropTypes.string,
   }).isRequired,
+  // eslint-disable-next-line react/require-default-props
+  adminMode: PropTypes.bool,
   deleteSession: PropTypes.func.isRequired,
 };
 

@@ -17,6 +17,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Infosec from '../pages/Infosec';
+import UserMessagesHistoryPage from '../pages/UserMessagesHistoryPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/user" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminPage /></AdminProtectedRoute>} />
+          <Route path="/admin/usermessages" element={<AdminProtectedRoute ready={ready}><UserMessagesHistoryPage /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

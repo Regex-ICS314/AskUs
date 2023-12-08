@@ -40,7 +40,7 @@ const UserSessionsAccordion = ({ user, eventKey }) => {
           <Table striped bordered hover>
             <tbody>
               {sessions.slice().reverse().map((session) => (
-                <ChatHistory key={session._id} session={session} collection={ChatSessions.collection} deleteSession={deleteSession} />
+                <ChatHistory key={session._id} session={session} collection={ChatSessions.collection} deleteSession={deleteSession} user={user} adminMode />
               ))}
             </tbody>
           </Table>
