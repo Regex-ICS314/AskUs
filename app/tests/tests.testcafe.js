@@ -82,7 +82,7 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test('Rate a chatbot message and provide feedback', async t => {
+test('Test rate a chatbot message and provide feedback', async t => {
   await navBar.gotoChatbotPage(t);
   await chatbotPage.isDisplayed(t);
 
