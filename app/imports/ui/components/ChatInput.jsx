@@ -11,6 +11,7 @@ const ChatInput = React.forwardRef((props, ref) => {
       <div className="d-flex">
         <InputGroup className="siteSearch">
           <Form.Control
+            id="chatbot-input" // Added ID for the chat input
             aria-describedby="basic-addon2"
             type="text"
             value={userInput}
@@ -22,7 +23,15 @@ const ChatInput = React.forwardRef((props, ref) => {
           { /* <Button variant="link" type="submit" className="ms-2 search"><Mic /></Button>
              component that renders the Mic icon for speech to text */ }
         </InputGroup>
-        <Button type="submit" className="ms-2" style={{ backgroundColor: '#907139' }} disabled={loading}>Send</Button>
+        <Button
+          id="chatbot-send"
+          type="submit"
+          className="ms-2"
+          style={{ backgroundColor: '#907139' }}
+          disabled={loading}
+        >
+          Send
+        </Button>
       </div>
     </Form>
   );

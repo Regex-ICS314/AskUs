@@ -89,7 +89,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
               >
                 {message.sender === 'bot' ? formatChatbotResponse(message.message) : message.message}
                 {message.sender === 'bot' ? (
-                  <InputGroup>
+                  <InputGroup id="chat-rating">
                     <ReactStars
                       count={5}
                       onChange={(rating) => ratingChanged(rating, message._id)}
@@ -97,7 +97,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
                       activeColor="#ffffff"
                     />
                     {/* Modal Component */}
-                    <Modal show={showModal} onHide={handleClose}>
+                    <Modal id="chat-feedback" show={showModal} onHide={handleClose}>
                       <Modal.Header closeButton>
                         <Modal.Title>Feedback</Modal.Title>
                       </Modal.Header>
@@ -107,6 +107,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
                           <Form.Group>
                             <Form.Label>What is your feedback?</Form.Label>
                             <Form.Control
+                              id="feedback-input" // Added ID for the chat input
                               aria-describedby="basic-addon2"
                               type="text"
                               value={userInput}
@@ -120,7 +121,7 @@ const ChatWindow = React.forwardRef((props, ref) => {
                         <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
-                        <Button className="feedback" onClick={() => handleSubmit(message._id)}>
+                        <Button id="feedback-button" className="feedback" onClick={() => handleSubmit(message._id)}>
                           Submit Feedback
                         </Button>
                       </Modal.Footer>

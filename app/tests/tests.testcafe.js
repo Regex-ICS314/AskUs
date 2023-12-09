@@ -55,10 +55,53 @@ test('Test Chatbot page shows up', async (testController) => {
   // Add more assertions or interactions specific to the Chatbot page
 });
 
+test('Test sending a message to the chatbot', async (testController) => {
+  // Navigate to the Chatbot page
+  await navBar.gotoChatbotPage(testController);
+  // Verify the Chatbot page is displayed
+  await chatbotPage.isDisplayed(testController);
+
+  const testMessage = 'Hello, chatbot!'; // Replace with the test message you want to send
+
+  // Send a message to the chatbot
+  await chatbotPage.sendMessage(testController, testMessage);
+});
+
+test('Test UserMessagesHistoryPage shows up', async (testController) => {
+  // Navigate to the UserMessagesHistoryPage
+  await testController.navigateTo('/admin/usermessages');
+
+  // Add your assertions or interactions here
+});
+
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
+});
+
+test('Rate a chatbot message and provide feedback', async t => {
+  await navBar.gotoChatbotPage(t);
+  await chatbotPage.isDisplayed(t);
+
+  // Send a message to trigger the bot's response if necessary
+  await chatbotPage.sendMessage(t, 'hello');
+
+  // Wait for bot's response before rating (adjust wait time as necessary)
+  await t.wait(2000); // Example wait time
+
+  // Rate the message and provide feedback
+  const feedbackForStars = [
+    'Feedback for 1 star',
+    'Feedback for 2 stars',
+    'Feedback for 3 stars',
+    'Feedback for 4 stars',
+    'Feedback for 5 stars',
+  ];
+
+  await chatbotPage.rateAndProvideFeedbackForAllStars(t, feedbackForStars);
+
+  // Add assertions here to verify that the feedback was submitted
 });

@@ -28,7 +28,7 @@ const UserMessagesHistoryPage = () => {
   }, []);
 
   return (
-    <Container>
+    <Container id="user-messages-history-page">
       <Button variant="secondary" onClick={() => { navigate('/admin'); }}> Go Back </Button>
       <h1>{`${user}'s Messages`}</h1>
       <h5>{`Chat Session: ${localStorage.getItem('sessionForViewingHistory')}`}</h5>
