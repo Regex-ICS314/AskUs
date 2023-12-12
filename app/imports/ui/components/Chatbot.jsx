@@ -11,6 +11,7 @@ import { Messages } from '../../api/message/Messages';
 import SimilarArticles from './SimilarArticles';
 import { ChatSessions } from '../../api/session/ChatSessions';
 import { RespTimes } from '../../api/resptime/RespTimes';
+import { SetNewChatSessionForUser } from './ChatSessionManager';
 
 const ChatBox = (props) => {
   const { input } = props;
@@ -39,11 +40,17 @@ const ChatBox = (props) => {
     setUserLanguage(e.target.value);
   };
   const handleSend = (e) => {
+
     e.preventDefault();
     setLoading(true);
 
-    const userId = Meteor.user() ? Meteor.user().username : 'notLoggedIn';
-    const sessionId = sessionStorage.getItem('chatbotSessionId');
+    const userId = Meteor.user() ? Meteor.userId() : 'notLoggedIn';
+    let sessionId = sessionStorage.getItem('chatbotSessionId');
+
+    if (!sessionId) {
+      SetNewChatSessionForUser(userInput);
+      sessionId = sessionStorage.getItem('chatbotSessionId');
+    }
 
     let sentAt = new Date();
     sentAt = new Date();
@@ -152,7 +159,7 @@ const ChatBox = (props) => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Message documents
-    const messageItems = Messages.collection.find({}).fetch();
+    const messageItems = Messages.collection.find({ sessionId: sessionStorage.getItem('chatbotSessionId') }).fetch();
     return {
       messages: messageItems,
       ready: rdy,
@@ -221,6 +228,7 @@ const ChatBox = (props) => {
           <ChatWindow
             ref={chat}
             chatSender={chatSender}
+            messages={messages}
             formatChatbotResponse={formatChatbotResponse}
             loading={loading}
           />

@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import Landing from '../pages/Landing';
 import ChatbotPage from '../pages/ChatbotPage';
 import AdminPage from '../pages/AdminPage';
@@ -18,6 +19,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Infosec from '../pages/Infosec';
 import UserMessagesHistoryPage from '../pages/UserMessagesHistoryPage';
+import { ChatSessions } from '../../api/session/ChatSessions';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -27,6 +29,44 @@ const App = () => {
       ready: rdy,
     };
   });
+  console.log(Meteor.userId());
+  const sentAt = new Date();
+  let sessionId = sessionStorage.getItem('chatbotSessionId');
+
+  if (!sessionId) {
+  // Check if a chat session already exists for this user
+    const existingSession = ChatSessions.collection.findOne({ userId: Meteor.userId() });
+
+    // If no existing session is found, create a new one
+    if (!existingSession) {
+      sessionId = uuidv4();
+      sessionStorage.setItem('chatbotSessionId', sessionId);
+      ChatSessions.collection.insert(
+        {
+          latestQuery: 'temp',
+          sentAt: sentAt,
+          userId: Meteor.userId() ? Meteor.userId() : 'notLoggedIn',
+          _id: sessionId,
+        },
+        (error, result) => {
+          if (error) {
+            console.log('Insert Error:', error);
+          } else {
+            console.log('Insert Result:', result);
+          }
+        },
+      );
+    } else {
+    // If an existing session is found, use its ID
+      sessionId = existingSession._id;
+    }
+  }
+
+  console.log(`Session ID: ${sessionId}`);
+  console.log(`User ID: ${Meteor.userId() ? Meteor.userId() : 'notLoggedIn'}`);
+  // alert(question);
+  // console.log(question);
+
   return (
     <Router>
       <div className="d-flex flex-column min-vh-100">

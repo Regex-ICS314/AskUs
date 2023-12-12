@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ChatHistoryTable = ({ message }) => (
   <tr>
@@ -10,5 +11,13 @@ const ChatHistoryTable = ({ message }) => (
   </tr>
 );
 
-
+ChatHistoryTable.propTypes = {
+  message: PropTypes.shape({
+    sender: PropTypes.string,
+    sentAt: PropTypes.instanceOf(Date),
+    message: PropTypes.string,
+    feedback: PropTypes.string,
+    stars: PropTypes.number,
+  }).isRequired,
+};
 export default ChatHistoryTable;

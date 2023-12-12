@@ -75,3 +75,10 @@ Meteor.publish('files.all', function () {
 Meteor.publish(UserSessions.userPublicationName, function () {
   return UserSessions.collection.find();
 });
+
+// eslint-disable-next-line consistent-return
+Meteor.publish('users', function () {
+  if (this.userId) {
+    return Meteor.users.find({}, { fields: { services: 0 } });
+  }
+});

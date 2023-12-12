@@ -49,7 +49,8 @@ const ChatWindow = React.forwardRef((props, ref) => {
     setShowModal(false);
     setUserInput(''); // Reset the input field after submitting feedback
   };
-  const { ready, messages } = useTracker(() => {
+
+  const { ready } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -57,15 +58,14 @@ const ChatWindow = React.forwardRef((props, ref) => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Message documents
-    const messageItems = Messages.collection.find({ sessionId: sessionStorage.getItem('chatbotSessionId') }).fetch();
+    // const messageItems = Messages.collection.find({ sessionId: sessionStorage.getItem('chatbotSessionId') }).fetch();
     return {
-      messages: messageItems,
+      // messages2: messageItems,
       ready: rdy,
     };
   }, []);
-
-  // eslint-disable-next-line no-unused-vars
-  const { chatSender, formatChatbotResponse, loading } = props;
+  // eslint-disable-next-line no-unused-vars,react/prop-types
+  const { chatSender, formatChatbotResponse, loading, messages } = props;
 
   return (ready ? (
     <div className="chat-window">

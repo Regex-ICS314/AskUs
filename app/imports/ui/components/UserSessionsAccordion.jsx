@@ -24,17 +24,32 @@ const UserSessionsAccordion = ({ user, eventKey }) => {
       ready: rdy,
     };
   }, []);
+
   const deleteSession = (sessionID) => {
     console.log(`Session ${sessionID} deleted`);
     ChatSessions.collection.remove(sessionID);
   };
-  console.log(sessions);
+  /*
+  console.log(`User passed in UserSessionsAccordion ${user}`);
+  console.log(Meteor.users.findOne({ _id: user }));
+  console.log(Meteor.users.findOne({ username: 'john@foo.com' }));
+  */
+
+  console.log(`User passed in UserSessionsAccordion ${user}`);
+  console.log(Meteor.users.findOne({ id: user }));
+  console.log(Meteor.users.find({}).fetch());
+  if (Meteor.isClient) {
+    Meteor.subscribe('users');
+    // eslint-disable-next-line no-shadow,react/prop-types
+    const userIds = Meteor.users.find({}, { fields: { _id: 1 } }).fetch().map(user => user._id);
+    console.log('User IDs', userIds);
+  }
+
+  const username = Meteor.users.findOne({ _id: user }) ? Meteor.users.findOne({ _id: user }).username : 'not logged in';
   return (
     <Accordion.Item eventKey={eventKey}>
-      {/* eslint-disable-next-line react/prop-types */}
-      {console.log(user)}
-      {/* eslint-disable-next-line react/prop-types */}
-      <Accordion.Header>{user}</Accordion.Header>
+
+      <Accordion.Header>{username}</Accordion.Header>
       <Accordion.Body>
         {ready ? (
           <Table striped bordered hover>

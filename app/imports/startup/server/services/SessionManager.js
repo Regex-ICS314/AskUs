@@ -1,9 +1,15 @@
 import { Random } from 'meteor/random';
 import { UserSessions } from '../../../api/session/UserSessions';
 
+// This session manager is for a new chatbot context session for each user and if user is not logged in there are different sessions to ensure not logged in users have the same chatbot context session
+// As this comment is written there is no new chatbot context session for every thread/chat session
 const createNewSession = (userId = null) => {
   // Generate a temporary user ID if none is provided
-  const tempUserId = userId || Random.id();
+  let tempUserId = userId || Random.id();
+
+  if (tempUserId === 'notLoggedIn') {
+    tempUserId = Random.id();
+  }
 
   const newSession = {
     userId: tempUserId,

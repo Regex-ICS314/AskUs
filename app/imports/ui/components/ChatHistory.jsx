@@ -37,6 +37,7 @@ const ChatHistory = ({ session, deleteSession, adminMode, user }) => {
       >
         <h5>{session.latestQuery}</h5>
         <p>{dateString}</p>
+        {adminMode ? <p>{session._id}</p> : null}
       </Col>
       <Col
         xs={1}

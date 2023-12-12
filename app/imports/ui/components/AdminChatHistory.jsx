@@ -26,7 +26,7 @@ const AdminChatHistory = () => {
     };
   }, []);
   // eslint-disable-next-line no-console
-  console.log(users);
+  console.log(`all users: ${users}`);
   return (
     <Accordion>
       {Array.isArray(users) && users.map((user, index) => (

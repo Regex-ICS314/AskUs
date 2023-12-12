@@ -14,7 +14,7 @@ const addSession = (sessionID) => {
     {
       latestQuery: '',
       sentAt: sentAt,
-      userId: Meteor.user() ? Meteor.user().username : 'notLoggedIn',
+      userId: Meteor.userId() ? Meteor.userId() : 'notLoggedIn',
       _id: sessionID,
     },
   );
@@ -30,8 +30,7 @@ const UserPage = () => {
   const { ready, sessions } = useTracker(() => {
     const subscription = Meteor.subscribe(ChatSessions.userPublicationName);
     const rdy = subscription.ready();
-    const userToFind = Meteor.user() ? Meteor.user().username : 'notLoggedIn';
-    console.log(userToFind);
+    const userToFind = Meteor.userId() ? Meteor.userId() : 'notLoggedIn';
     const sessionItems = ChatSessions.collection.find({ userId: userToFind }).fetch();
     sessionItems.sort((a, b) => a.date - b.date);
     return {
@@ -39,6 +38,7 @@ const UserPage = () => {
       ready: rdy,
     };
   }, []);
+
   console.log(sessions);
   return (
     <Container id="user-page">

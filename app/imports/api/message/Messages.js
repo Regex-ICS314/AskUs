@@ -13,7 +13,10 @@ class MessagesCollection {
       message: String,
       feedback: String,
       sessionId: String,
-      userId: String,
+      userId: {
+        type: String,
+        optional: true,
+      },
       sentAt: Date,
       stars: Number,
       // Add more fields if necessary
