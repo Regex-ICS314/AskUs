@@ -9,10 +9,6 @@ import LoadingBar from './LoadingBar';
 
 // eslint-disable-next-line react/prop-types
 const UserSessionsAccordion = ({ user, eventKey }) => {
-
-  // eslint-disable-next-line no-console
-  console.log(user);
-  // eslint-disable-next-line no-unused-vars
   const { ready, sessions } = useTracker(() => {
     const subscription = Meteor.subscribe(ChatSessions.userPublicationName);
     const rdy = subscription.ready();
@@ -25,15 +21,10 @@ const UserSessionsAccordion = ({ user, eventKey }) => {
     };
   }, []);
   const deleteSession = (sessionID) => {
-    console.log(`Session ${sessionID} deleted`);
     ChatSessions.collection.remove(sessionID);
   };
-  console.log(sessions);
   return (
     <Accordion.Item eventKey={eventKey}>
-      {/* eslint-disable-next-line react/prop-types */}
-      {console.log(user)}
-      {/* eslint-disable-next-line react/prop-types */}
       <Accordion.Header>{user}</Accordion.Header>
       <Accordion.Body>
         {ready ? (

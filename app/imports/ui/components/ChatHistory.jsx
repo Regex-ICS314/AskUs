@@ -13,13 +13,10 @@ const ChatHistory = ({ session, deleteSession, adminMode, user }) => {
   const navigate = useNavigate();
   const handleRowClickUser = () => {
     navigate('/chatbot');
-    console.log(`Current Session ID: ${session._id}`);
-    sessionStorage.setItem('chatbotSessionId', session._id);
   };
 
   const handleRowClickAdmin = () => {
     navigate('/admin/usermessages');
-    console.log('admin mode');
     localStorage.setItem('userForViewingHistory', user);
     localStorage.setItem('sessionForViewingHistory', session._id);
   };

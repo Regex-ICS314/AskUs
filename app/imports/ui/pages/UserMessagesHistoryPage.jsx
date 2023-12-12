@@ -7,11 +7,11 @@ import LoadingBar from '../components/LoadingBar';
 import { Messages } from '../../api/message/Messages';
 import ChatHistoryTable from '../components/ChatHistoryTable';
 
+/* Page for the admin to see all user's previous chats */
 // eslint-disable-next-line react/prop-types
 const UserMessagesHistoryPage = () => {
   const navigate = useNavigate();
   const user = localStorage.getItem('userForViewingHistory');
-  console.log(localStorage.getItem('sessionForViewingHistory'));
   const { ready, messages } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
@@ -45,7 +45,6 @@ const UserMessagesHistoryPage = () => {
               </tr>
             </thead>
             <tbody>
-              {console.log(localStorage.getItem('sessionForViewingHistory'))}
               {messages.map((message) => <ChatHistoryTable key={message._id} message={message} />)}
             </tbody>
           </Table>

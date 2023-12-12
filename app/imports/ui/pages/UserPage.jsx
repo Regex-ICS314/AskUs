@@ -9,7 +9,6 @@ import LoadingBar from '../components/LoadingBar';
 
 const addSession = (sessionID) => {
   const sentAt = new Date();
-  console.log(`New Session ${sessionID} added`);
   ChatSessions.collection.insert(
     {
       latestQuery: '',
@@ -22,7 +21,6 @@ const addSession = (sessionID) => {
 };
 
 const deleteSession = (sessionID) => {
-  console.log(`Session ${sessionID} deleted`);
   ChatSessions.collection.remove(sessionID);
 };
 const UserPage = () => {
@@ -31,7 +29,6 @@ const UserPage = () => {
     const subscription = Meteor.subscribe(ChatSessions.userPublicationName);
     const rdy = subscription.ready();
     const userToFind = Meteor.user() ? Meteor.user().username : 'notLoggedIn';
-    console.log(userToFind);
     const sessionItems = ChatSessions.collection.find({ userId: userToFind }).fetch();
     sessionItems.sort((a, b) => a.date - b.date);
     return {
@@ -39,7 +36,6 @@ const UserPage = () => {
       ready: rdy,
     };
   }, []);
-  console.log(sessions);
   return (
     <Container id="user-page">
       <h1> History </h1>
