@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Trash } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
+/** Component that renders the chat history, has an admin mode or a user mode.
+* Admin mode opens a table of all messages, user mode goes to the chat session.
+ * @returns A box for representing each session for a user */
 // eslint-disable-next-line react/prop-types
 const ChatHistory = ({ session, deleteSession, adminMode, user }) => {
   const [isHovered, setIsHovered] = useState(false);
